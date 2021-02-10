@@ -1,3 +1,15 @@
+/**
+ * Made for Robotics TeamPi 2021 Build Season
+ * Author: Caleb Kyei
+ * Year: 2021
+ * 
+ * Remarks: Can be resused for newer motor controllers by simply
+ *          overloading the constructor to accommodate initialisation
+ *          process and adding functions in between
+ * 
+ **/
+
+
 #pragma once
 
 
@@ -17,7 +29,7 @@ private:
   motorCtrlTypes motorCtrlType;
 
   //General fields
-  int canID;
+  int* canID;
 
 
   //SparkMax Fields
@@ -25,7 +37,7 @@ private:
   CANEncoder *rtpiSparkMaxEncoder;
   CANPIDController *rtpiSparkMaxPIDController;
   void RTPI_SparkMax(bool brushless, int canID, double acceleration, bool inverted, bool encoder, bool pidController);
-  
+
 
   //TalonFX Fields
   WPI_TalonFX* talonFX;
