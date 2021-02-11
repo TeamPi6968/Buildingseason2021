@@ -1,0 +1,4 @@
+-----------------Use python 3.7.9---------------------
+to install intel drivers use: pip install pyrealsense2
+to install openCV use: pip install opencv-python
+to install numpy use: pip install numpy

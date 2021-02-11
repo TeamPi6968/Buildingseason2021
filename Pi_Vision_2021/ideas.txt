@@ -1,0 +1,2 @@
+Maybe Yolov3 is somthing we can look into for object recognision.
+Feature Detection and Matching looks also like a coo idea for detecting the target.
