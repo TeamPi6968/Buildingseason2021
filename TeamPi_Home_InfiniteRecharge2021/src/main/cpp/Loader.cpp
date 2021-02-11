@@ -13,7 +13,7 @@ bool Loader::isCellDetected(){
   return this->IR_LoadSensor->readSensor();
 }
 
-void Loader::runLoadMotor(){
+void Loader::runLoader(){
   if(isCellDetected()){
     Loader_Motors->GetSparkMax()->Set(LoaderMotorSpeed);
   }
@@ -22,6 +22,6 @@ void Loader::runLoadMotor(){
   }
 }
 
-void Loader::runLoadMotor(double setSpeed){
+void Loader::runLoader(double setSpeed){
   Loader_Motors->GetSparkMax()->Set(setSpeed);
 }

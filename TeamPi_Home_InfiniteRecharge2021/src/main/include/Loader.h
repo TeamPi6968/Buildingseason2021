@@ -17,8 +17,8 @@ public:
   ~Loader();
 
 
-  void runLoadMotor();
-  void runLoadMotor(double setSpeed);
+  void runLoader();
+  void runLoader(double setSpeed);
 
 
 };
