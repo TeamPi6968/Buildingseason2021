@@ -1,7 +1,7 @@
 /**
  * Made for Robotics TeamPi 2021 Build Season
  * Author: Caleb Kyei
- * Year: 2021
+ * Date: 10/02/2021 14:00
  * 
  * Remarks: Can be resused for newer motor controllers by simply
  *          overloading the constructor to accommodate initialisation
@@ -22,14 +22,8 @@ class Motors
 {
 private:
 
-  enum motorCtrlTypes{
-    SPARKMAX,
-    TALONFX
-  };
-  motorCtrlTypes motorCtrlType;
-
   //General fields
-  int* canID;
+  int canID;
 
 
   //SparkMax Fields
@@ -45,8 +39,15 @@ private:
 
 
 public:
-  Motors(Motors::motorCtrlTypes selectType, int canID);
-  Motors(Motors::motorCtrlTypes selectType, int canID, bool brushless, double acceleration, bool inverted, bool encoder, bool pidController);
+
+  //Select the motor controller type... 
+  enum motorCtrlTypes{
+    SPARKMAX,
+    TALONFX
+  };
+
+  Motors(motorCtrlTypes selectType, int canID);
+  Motors(motorCtrlTypes selectType, int canID, bool brushless, double acceleration, bool inverted, bool encoder, bool pidController);
   ~Motors();
   
 
@@ -60,9 +61,3 @@ public:
   WPI_TalonFX *GetTalonFX();
 
 };
-
-
-namespace SparkMax{
-  
-  
-}

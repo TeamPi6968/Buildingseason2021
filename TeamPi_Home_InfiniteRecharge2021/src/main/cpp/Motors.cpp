@@ -2,11 +2,9 @@
 
 
 //Use this to initialise only talonfx based motors
-Motors::Motors(Motors::motorCtrlTypes selectType, int canID)
-{
-  motorCtrlType = selectType;
+Motors::Motors(motorCtrlTypes selectType, int canID){
 
-  if(motorCtrlType == TALONFX){
+  if(selectType == TALONFX){
     talonFX = new WPI_TalonFX(canID);
   }
 }
@@ -14,12 +12,12 @@ Motors::Motors(Motors::motorCtrlTypes selectType, int canID)
 /** Use this to initialise only SparkMax based motors
  * @param acceleration Time in seconds to move from 0 to full throtte
  * @param inverted Set the direction of motor... false is reverse, true is normal forward
- * @param encoder @param PIDcontroller Set to true if you want to use Spark encoders and PIDControl
+ * @param encoder Set to true if you want to use Spark encoders
+ * @param PIDcontroller Set to true if you want to use Spark PIDControl
 **/
-Motors::Motors(Motors::motorCtrlTypes selectType, int canID, bool brushless, double acceleration, bool inverted, bool encoder, bool pidController){
-  motorCtrlType = selectType;
+Motors::Motors(motorCtrlTypes selectType, int canID, bool brushless, double acceleration, bool inverted, bool encoder, bool pidController){
 
-  if (motorCtrlType == SPARKMAX){
+  if (selectType == SPARKMAX){
     Motors::RTPI_SparkMax(brushless,canID,acceleration,inverted,encoder,pidController);
   }
 }
