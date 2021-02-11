@@ -7,6 +7,8 @@
 #include <frc/TimedRobot.h>
 #include "Motors.h"
 #include "Loader.h"
+#include "Sensors.h"
+
 
 class Robot : public frc::TimedRobot {
  public:
