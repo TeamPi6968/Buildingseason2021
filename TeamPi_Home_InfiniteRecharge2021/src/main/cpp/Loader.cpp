@@ -25,4 +25,3 @@ void Loader::runLoader(){
 void Loader::runLoader(double setSpeed){
   Loader_Motors->GetSparkMax()->Set(setSpeed);
 }
-//will it push
