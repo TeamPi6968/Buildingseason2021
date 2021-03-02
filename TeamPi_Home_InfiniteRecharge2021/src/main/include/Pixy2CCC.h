@@ -2,7 +2,7 @@
  * Author: Caleb Kyei
  * Date: 29/02/2021 00:00
  * 
- * Remarks: This includes all the utility classes and code snippets 
+ * Remarks: This is the colour connected component library 
  *          for connecting pixy to the roborio
  * 
  * */
