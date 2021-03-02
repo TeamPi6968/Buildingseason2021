@@ -42,6 +42,7 @@ public:
 
     const uint8_t CCC_SIG_ALL = 0xff; // All bits or'ed together
 
+    int numBlocks;
     std::vector<Block> *getBlockCache();
 
     int getBlocks();

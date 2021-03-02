@@ -79,6 +79,8 @@ int Pixy2CCC::getBlocks(bool wait, int sigmap) {
 int Pixy2CCC::getBlocks(bool wait, int sigmap, int maxBlocks) {
     long start = (long)frc::GetTime();
 
+    numBlocks = 0;
+
     while (true) {
         // Fill in request data
         pixy->bufferPayload[0] = sigmap;
@@ -103,7 +105,8 @@ int Pixy2CCC::getBlocks(bool wait, int sigmap, int maxBlocks) {
                             (pixy->buffer[i + 12] & 0xff), (pixy->buffer[i + 13] & 0xff));
                     blocks->push_back(*b);
                 }
-                return blocks->size(); // Success
+                numBlocks = blocks->size(); // Success
+                return numBlocks;
             } else if (pixy->type == PIXY_TYPE_RESPONSE_ERROR) {
                 // Deal with busy and program changing states from Pixy2 (we'll wait)
                 if (pixy->buffer[0] == PIXY_RESULT_BUSY) {
