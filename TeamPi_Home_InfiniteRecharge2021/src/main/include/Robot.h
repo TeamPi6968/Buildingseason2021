@@ -8,6 +8,8 @@
 #include "Motors.h"
 #include "Loader.h"
 #include "Sensors.h"
+#include <Pixy2CCC.h>
+//#include <PixyProgram.h>
 
 
 class Robot : public frc::TimedRobot {
