@@ -9,16 +9,38 @@
 #pragma once
 #include "Pixy2CCC.h"
 #include "Pixy2Video.h"
+//#include <iostream>
 
-
-Pixy2* pixy = new Pixy2(Pixy2::LinkType::SPI);
-Pixy2CCC* ccc = new Pixy2CCC(pixy);
-Pixy2Video* video = new Pixy2Video(pixy);
+class Pixy2Program
+{
+private:
+    Pixy2* pixy;
+    Pixy2CCC* ccc;
+    Pixy2Video* video;
 
 //Connected Components predefined details
-bool wait = true;
-uint8_t sigmap = ccc->CCC_SIG_ALL;
-uint8_t maxBlocks = 0xff;
+// bool wait = true;
+// uint8_t sigmap = ccc->CCC_SIG_ALL;
+// uint8_t maxBlocks = 0xff;
+
+    //General logic
+    void Pixy2_Init();
+    Block *trackBlock(uint8_t index);
+    int acquireBlock();
+
+public:
+    Pixy2Program();
+    ~Pixy2Program();
+
+    void runPixy2Intake();
+};
+
+
+
+
+
+
+
 
 //General logic
 void Pixy2_Init();
