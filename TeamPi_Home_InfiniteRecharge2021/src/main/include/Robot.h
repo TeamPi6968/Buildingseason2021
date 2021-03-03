@@ -5,13 +5,14 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
-#include "Motors.h"
-#include "Loader.h"
-#include "Sensors.h"
-
+//#include "Loader.h"
+#include "Pixy2Program.h"
 
 class Robot : public frc::TimedRobot {
- public:
+  private:
+  Pixy2Program* pixy;
+
+  public:
   void RobotInit() override;
   void RobotPeriodic() override;
 
@@ -26,4 +27,6 @@ class Robot : public frc::TimedRobot {
 
   void TestInit() override;
   void TestPeriodic() override;
+
+
 };

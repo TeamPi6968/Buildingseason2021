@@ -8,8 +8,12 @@
 void Robot::RobotInit() {}
 void Robot::RobotPeriodic() {}
 
-void Robot::AutonomousInit() {}
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousInit() {
+  pixy = new Pixy2Program();
+}
+void Robot::AutonomousPeriodic() {
+  pixy->runPixy2Intake();
+}
 
 void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {}
