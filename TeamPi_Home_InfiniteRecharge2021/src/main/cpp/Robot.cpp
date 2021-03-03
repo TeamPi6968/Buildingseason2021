@@ -4,7 +4,6 @@
 
 #include "Robot.h"
 
-
 void Robot::RobotInit() {}
 void Robot::RobotPeriodic() {}
 
@@ -23,6 +22,7 @@ void Robot::DisabledPeriodic() {}
 
 void Robot::TestInit() {}
 void Robot::TestPeriodic() {}
+
 
 #ifndef RUNNING_FRC_TESTS
 int main() {
