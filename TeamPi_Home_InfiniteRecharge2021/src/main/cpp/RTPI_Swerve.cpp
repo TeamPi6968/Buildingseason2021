@@ -46,8 +46,9 @@ void RTPI_Swerve::SetAllDriveSpeed(double speed){
     }
 }
 
+//distance in centimetres
 void RTPI_Swerve::SetAllDriveDistance(double distance){
-    double pos = distance/this->DriveGearRatio;
+    double pos = distance;///this->DriveGearRatio;
     for(int i = 0; i < 4; i++){
         this->DriveMotors[i]->Set(ControlMode::Position,pos);
     }

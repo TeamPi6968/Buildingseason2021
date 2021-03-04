@@ -42,6 +42,6 @@ const double LoaderMotorSpeed = 0.5;
 // Encoder and Gear Coeficients
 
 // 360/43000 360/ steps in one swerve module turn 
-const double RotationCoeficient = 0.00837209302;
+const double RotationCoeficient = 0.00837209302; //0.047619047619047619
 
-const double DriveCoeficient = 1 ;// to be determined
+const double DriveCoeficient = 31.9024; //0.040178571428; // to be determined 31.9024cm is 1 rotation

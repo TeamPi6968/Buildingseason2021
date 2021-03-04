@@ -34,6 +34,7 @@ class RTPI_Swerve
 
         double RotateGearRatio = 1000;
         double DriveGearRatio = 100;
+        double driveGearRatioMagic = 31.9024;
 
     public:
 
