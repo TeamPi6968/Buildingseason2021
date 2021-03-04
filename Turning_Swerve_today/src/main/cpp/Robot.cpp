@@ -41,7 +41,7 @@ class Robot: public frc::TimedRobot {
   double x;
   double y;
   double angleCoef = 0.00837209302;
-  double motorCoef = 0.00837209302; //TBD
+  double motorCoef = 0.00837209302; //TBD "360/ encoder Value When Drive Wheel spinned one time"
   frc::Joystick m_stick{0};
 
   
@@ -175,8 +175,6 @@ class Robot: public frc::TimedRobot {
 
   }
   void AutonomousPeriodic() override{
-
-
     Motor1->Config_kP(0,0.5);
     Motor1->Config_kI(0,0);
     Motor1->Config_kD(0,0.1);
@@ -229,6 +227,10 @@ class Robot: public frc::TimedRobot {
     Angle4->Set(ControlMode::Position, 720);
   }
 };
+//function to drive robot, for distance, angle of wheeks, speed, and direction of it.
+
+
+
 
 
 
