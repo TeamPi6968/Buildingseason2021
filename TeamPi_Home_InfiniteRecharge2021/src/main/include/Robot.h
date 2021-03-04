@@ -9,9 +9,12 @@
 #include "Loader.h"
 #include "Sensors.h"
 #include "RTPI_Swerve.h"
+#include "RobotConstants.h"
 
 
 class Robot : public frc::TimedRobot {
+  private:
+  RTPI_Swerve * Swerve;
  public:
   void RobotInit() override;
   void RobotPeriodic() override;
