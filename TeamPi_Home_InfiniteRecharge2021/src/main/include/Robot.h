@@ -5,16 +5,21 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
-#include "Motors.h"
-#include "Loader.h"
-#include "Sensors.h"
 #include "RTPI_Swerve.h"
 #include "RobotConstants.h"
+#include <frc/Timer.h>
+#include "Intake_System.h"
+#include <ctre/Phoenix.h>
+#include "Turret.h"
 
 
 class Robot : public frc::TimedRobot {
   private:
   RTPI_Swerve * Swerve;
+  frc::Timer* time;
+  double lastTime;
+  double intakeDelay = 3;
+  Intake_System* intake;
 
   enum DrivePath
   {
@@ -23,6 +28,15 @@ class Robot : public frc::TimedRobot {
     third = 2,
     done = 3
   } drivePath;
+
+  //Motors
+  //Storage
+  Motors* StorageMotor1;
+  //Loader
+  Motors* LoaderMotor1;
+
+  //Turret
+  Turret * turret;
 
 
  public:
