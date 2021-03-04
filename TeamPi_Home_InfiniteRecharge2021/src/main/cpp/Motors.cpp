@@ -11,14 +11,14 @@ Motors::Motors(motorCtrlTypes selectType, int canID){
 
 /** Use this to initialise only SparkMax based motors
  * @param acceleration Time in seconds to move from 0 to full throtte
- * @param inverted Set the direction of motor... false is reverse, true is normal forward
+ * @param isInverted Set the direction of motor... false is reverse, true is normal forward
  * @param encoder Set to true if you want to use Spark encoders
  * @param PIDcontroller Set to true if you want to use Spark PIDControl
 **/
-Motors::Motors(motorCtrlTypes selectType, int canID, bool brushless, double acceleration, bool inverted, bool encoder, bool pidController){
+Motors::Motors(motorCtrlTypes selectType, int canID, bool isBrushless, double acceleration, bool isInverted, bool encoder, bool pidController){
 
   if (selectType == SPARKMAX){
-    Motors::RTPI_SparkMax(brushless,canID,acceleration,inverted,encoder,pidController);
+    Motors::RTPI_SparkMax(isBrushless,canID,acceleration,isInverted,encoder,pidController);
   }
 }
 
@@ -33,8 +33,8 @@ WPI_TalonFX* Motors::GetTalonFX(){
 
 
 //Below is the SparkMax initialisation and setup 
-void Motors::RTPI_SparkMax(bool brushless, int canID, double acceleration, bool inverted, bool encoder, bool pidController) {
-  if(brushless) {
+void Motors::RTPI_SparkMax(bool isBrushless, int canID, double acceleration, bool isInverted, bool encoder, bool pidController) {
+  if(isBrushless) {
     this->rtpiSparkMax = new CANSparkMax(canID, CANSparkMax::MotorType::kBrushless);
   }
   else {
@@ -42,7 +42,7 @@ void Motors::RTPI_SparkMax(bool brushless, int canID, double acceleration, bool 
   }
   rtpiSparkMax->RestoreFactoryDefaults();
   rtpiSparkMax->SetOpenLoopRampRate(acceleration);
-  rtpiSparkMax->SetInverted(inverted);
+  rtpiSparkMax->SetInverted(isInverted);
 
   if(encoder) {
     rtpiSparkMaxEncoder = new CANEncoder(rtpiSparkMax->GetEncoder());
