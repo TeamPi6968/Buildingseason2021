@@ -45,3 +45,19 @@ const double LoaderMotorSpeed = 0.5;
 const double RotationCoeficient = 0.00837209302; //0.047619047619047619
 
 const double DriveCoeficient = 31.9024; //0.040178571428; // to be determined 31.9024cm is 1 rotation
+
+
+//--------- Turret System
+    // Motor ID's 
+    const int shoot_master_CAN = 0;
+    const int shoot_slave_CAN = 1;
+    const int rotate_motor_CAN = 2;
+    const int angle_motor_CAN = 3;
+
+    // Roborio ID's
+    const int switch_rotation_port_1 = 0;
+    const int switch_rotation_port_2 = 1;
+    const int switch_angle_port = 2;
+
+    // var
+    const int homing_speed = 0.2;
