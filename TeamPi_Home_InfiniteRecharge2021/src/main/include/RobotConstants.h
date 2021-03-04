@@ -9,10 +9,17 @@
 
 #pragma once
 
+//motor CAN ID's
+
+const int LFMotor = 1;
+const int RFMotor = 2;
+const int LBMotor = 3;
+const int RBMotor = 4;
+
+
 //Loader Specifications
 const double LoaderMotorSpeed = 0.5;
 
 //Loader Motors
 
 //Loader Sensors
-

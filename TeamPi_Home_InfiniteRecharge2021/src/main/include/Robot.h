@@ -8,6 +8,7 @@
 #include "Motors.h"
 #include "Loader.h"
 #include "Sensors.h"
+#include "RTPI_Swerve.h"
 
 
 class Robot : public frc::TimedRobot {
