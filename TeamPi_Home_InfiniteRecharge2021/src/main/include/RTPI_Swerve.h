@@ -19,10 +19,11 @@ class RTPI_Swerve
         WPI_TalonFX* LBDrive; 
         WPI_TalonFX* RBDrive; 
 
-        WPI_TalonFX* RotateMotors[4] = {LFRotate,RFRotate,LBRotate,RBRotate}
-        WPI_TalonFX* DriveMotors[4]  = {LFDrive,RFDrive,LBDrive,RBDrive}
+        WPI_TalonFX* RotateMotors[4] = {LFRotate,RFRotate,LBRotate,RBRotate};
+        WPI_TalonFX* DriveMotors[4]  = {LFDrive,RFDrive,LBDrive,RBDrive};
 
-        double gearRatio = 1000;
+        double RotateGearRatio = 1000;
+        double DriveGearRatio = 100;
 
     public:
         //to set the PID of the motors
@@ -33,4 +34,7 @@ class RTPI_Swerve
         void SetAllDirection(double degrees);
 
         //set all the driving motors to a specific speed
-        void SetAllDrive(double speed);
+        void SetAllDriveSpeed(double speed);
+
+        //set all the driving motors to a specific distance
+        void SetAllDriveDistance(double distance);

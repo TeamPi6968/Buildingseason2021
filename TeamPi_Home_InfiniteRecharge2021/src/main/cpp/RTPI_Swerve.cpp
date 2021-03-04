@@ -23,14 +23,21 @@ void RTPI_Swerve::SetRotatePIDValues(double kP, double kI, double kD, double kMi
 }
 
 void RTPI_Swerve::SetAllDirection(double degrees){
-    double pos = degrees/this->gearRatio //set gear ratio here
+    double pos = degrees/this->RotateGearRatio; //set gear ratio here
     for(int i; i<5; i++){
-        this->RotateMotors[i]->Set(ControlMode::Position,pos)
+        this->RotateMotors[i]->Set(ControlMode::Position,pos);
     }
 }
 
-void RTPI_Swerve::SetAllDrive(double speed){
+void RTPI_Swerve::SetAllDriveSpeed(double speed){
     for(int i; i<5; i++){
-        this->DriveMotors[i]->Set(ControlMode::Velocity,speed)
+        this->DriveMotors[i]->Set(ControlMode::Velocity,speed);
+    }
+}
+
+void RTPI_Swerve::SetAllDriveDistance(double distance){
+    double pos = degrees/this->DriveGearRatio;
+    for(int i; i<5; i++){
+        this->DriveMotors[i]->Set(ControlMode::Position,pos);
     }
 }
