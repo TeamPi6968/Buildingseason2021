@@ -15,6 +15,16 @@
 class Robot : public frc::TimedRobot {
   private:
   RTPI_Swerve * Swerve;
+
+  enum DrivePath
+  {
+    first = 0,
+    second = 1,
+    third = 2,
+    done = 3
+  } drivePath;
+
+
  public:
   void RobotInit() override;
   void RobotPeriodic() override;

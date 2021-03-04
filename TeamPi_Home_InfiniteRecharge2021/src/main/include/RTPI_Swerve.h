@@ -34,13 +34,12 @@ class RTPI_Swerve
 
         double RotateGearRatio = 1000;
         double DriveGearRatio = 100;
-        double degrees =1;
 
     public:
 
         RTPI_Swerve(double driveCoeff, double rotateCoeff);
         //to set the PID of the motors
-        void SetRotatePIDValues(double kP, double kI, double kD, double kMinOutput, double kMaxOutput);
+        void SetRotatePIDValues(double kP, double kI, double kD);
         //void SetDrivePIDValues(double kP, double kI, double kD, double kMinOutput, double kMaxOutput);
         
         //move all the rotation motors to a specific angle

@@ -16,11 +16,16 @@ RTPI_Swerve::RTPI_Swerve(double driveCoeff, double rotateCoeff){
         this->RotateMotors[i]->ConfigSelectedFeedbackCoefficient(rotateCoeff,0,50);
         this->DriveMotors[i]->ConfigSelectedFeedbackCoefficient(driveCoeff,0,50);
     }
-    
 
+    for (int i = 0; i < 4; i++)
+    {
+        this->RotateMotors[i]->SetSelectedSensorPosition(0,0,50);
+        this->DriveMotors[i]->SetSelectedSensorPosition(0,0,50);
+    }
+    
 }
 
-void RTPI_Swerve::SetRotatePIDValues(double kP, double kI, double kD, double kMinOutput, double kMaxOutput) {
+void RTPI_Swerve::SetRotatePIDValues(double kP, double kI, double kD) {
   for(int i = 0; i < 4; i++){
     this->RotateMotors[i]->Config_kP(0,kP,50);
     this->RotateMotors[i]->Config_kI(0,kI,50);
@@ -29,7 +34,7 @@ void RTPI_Swerve::SetRotatePIDValues(double kP, double kI, double kD, double kMi
 }
 
 void RTPI_Swerve::SetAllDirection(double degrees){
-    double pos = degrees/this->RotateGearRatio; //set gear ratio here
+    double pos = degrees;          
     for(int i = 0; i< 4; i++){
         this->RotateMotors[i]->Set(ControlMode::Position,pos);
     }
@@ -42,8 +47,8 @@ void RTPI_Swerve::SetAllDriveSpeed(double speed){
 }
 
 void RTPI_Swerve::SetAllDriveDistance(double distance){
-    double pos = degrees/this->DriveGearRatio;
-    for(int i = 0; i< 4; i++){
+    double pos = distance/this->DriveGearRatio;
+    for(int i = 0; i < 4; i++){
         this->DriveMotors[i]->Set(ControlMode::Position,pos);
     }
 }

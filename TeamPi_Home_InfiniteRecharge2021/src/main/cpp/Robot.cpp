@@ -10,25 +10,37 @@
 
 
 void Robot::RobotInit() {
- this->Swerve = new RTPI_Swerve();
 
-Swerve->SetCoefEncoderUnits(0,turningEncoderCoef);
-Swerve->SetCoefEncoderUnits(1,drivingEncoderCoef);
-Swerve->SetRotatePIDValues(1.0,0.0,0.0,0.0,0.5);
-//Zero the position of all Rotating Motors
-swerve->InitializeEncoders(0);
-//Zero the position of all Driving Motors
-Swerve->InitializeEncoders(1);
 }
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+
+}
 
 void Robot::AutonomousInit() {
-
+  this->Swerve = new RTPI_Swerve(DriveCoeficient,RotationCoeficient);
+  this->Swerve->SetRotatePIDValues(SwervekP,SwervekI,SwervekD);
+  drivePath = DrivePath::first;
+  
 }
 void Robot::AutonomousPeriodic() {
-
-
-
+  switch (drivePath)
+  {
+  case DrivePath::first:
+    this->Swerve->SetAllDriveDistance(firstStep);
+    drivePath = DrivePath::second;
+    break;
+  case DrivePath::second:
+    this->Swerve->SetAllDirection(turn90);
+    this->Swerve->SetAllDriveDistance(firstStep/2);
+    drivePath = DrivePath::third;
+    break;
+    case DrivePath::third:
+    
+    drivePath = DrivePath::done;
+    break;
+  default:
+    break;
+  }
 
 }
 
