@@ -32,8 +32,7 @@ const int RBMotorDrive = 8;
 
 
 
-//Loader Specifications
-const double LoaderMotorSpeed = 0.5;
+
 
 //Motors
 #define brushed true
