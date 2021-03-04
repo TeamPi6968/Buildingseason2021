@@ -8,8 +8,22 @@
 void Robot::RobotInit() {}
 void Robot::RobotPeriodic() {}
 
-void Robot::AutonomousInit() {}
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousInit() {
+  time = new Timer();
+  time->Start();
+  lastTime = time->Get();
+  intake = new Intake_System(LoaderMotor1,StorageMotor1);
+}
+
+void Robot::AutonomousPeriodic() {
+
+  if (time->Get() - lastTime < intakeDelay) //Time to keep the motors running
+  {
+    intake->loader->runLoader();
+    intake->storage->runStorage();
+  }
+  
+}
 
 void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {}
