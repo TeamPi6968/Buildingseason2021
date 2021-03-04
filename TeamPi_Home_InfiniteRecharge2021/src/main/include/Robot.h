@@ -5,12 +5,26 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
-#include "Motors.h"
-#include "Loader.h"
-#include "Sensors.h"
+#include <frc/Timer.h>
+#include "Intake_System.h"
 
 
 class Robot : public frc::TimedRobot {
+ private:
+  frc::Timer* time;
+  double lastTime;
+  double intakeDelay = 3;
+  Intake_System* intake;
+
+
+  //Motors
+  //Storage
+  Motors* StorageMotor1 = new Motors(Motors::motorCtrlTypes::SPARKMAX, StoragecanID1,brushed,accelerate,inverted,noEncoder,noPID);
+
+  //Loader
+  Motors* LoaderMotor1 = new Motors(Motors::motorCtrlTypes::SPARKMAX, LoadercanID1,brushed,accelerate,inverted,noEncoder,noPID);
+
+
  public:
   void RobotInit() override;
   void RobotPeriodic() override;
