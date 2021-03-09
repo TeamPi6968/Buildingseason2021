@@ -24,9 +24,9 @@ class Drivetrain{
   // some math for the swerve drive.
   // double MathSpeed(double xVal, double yVal);
   // double MathDirection(double xVal, double yVal);
-  auto MathSwerve(float xValue, float yValue, float rot);
+  auto MathSwerve(double xValue, double yValue, double rot);
   // Drive with the swerve drive, uses the x and y values of the stick.
-  void Drive(float xValue, float yValue, float rotation);
+  void Drive(double xValue, double yValue, double rotation);
 
 
  private:

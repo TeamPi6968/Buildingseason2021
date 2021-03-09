@@ -17,10 +17,9 @@ class Robot : public frc::TimedRobot {
   private:
   Drivetrain Swerve;
   frc::Joystick m_stick{0};
+
   public:
-  void RobotInit() override{
-    
-  }
+  void RobotInit() override{}
   void RobotPeriodic() override{}
 
   // void Robot::AutonomousInit() {}

@@ -18,10 +18,10 @@
 //   SwerveModule module_backRight{RBMotorDrive, RBMotor};
 // }
 
-auto Drivetrain::MathSwerve(float xValue, float yValue, float rot){
+auto Drivetrain::MathSwerve(double xValue, double yValue, double rot){
     if (rot == 0){
         // calc the speed and oriantation of the mod  (speed, direction)
-        float SwerveModVal [4][2] = {{sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)},
+        double SwerveModVal [4][2] = {{sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)},
                                         {sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)},
                                         {sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)},
                                         {sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)}};
@@ -33,13 +33,13 @@ auto Drivetrain::MathSwerve(float xValue, float yValue, float rot){
         rot = rot * MaxRad;
 
         // vector calc per module  (x, y) 
-        float VectorFL[2] = {rot * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rot * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
-        float VectorFR[2] = {rot * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rot * DistanceMod[1] * sin(RotVecInRad) + yValue * MaxSpeed};
-        float VectorBL[2] = {-rot * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, -rot * DistanceMod[2] * sin(RotVecInRad) + yValue * MaxSpeed};
-        float VectorBR[2] = {-rot * DistanceMod[3] * cos(RotVecInRad) + xValue * MaxSpeed, rot * DistanceMod[3] * sin(RotVecInRad) + yValue * MaxSpeed};
+        double VectorFL[2] = {rot * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rot * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
+        double VectorFR[2] = {rot * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rot * DistanceMod[1] * sin(RotVecInRad) + yValue * MaxSpeed};
+        double VectorBL[2] = {-rot * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, -rot * DistanceMod[2] * sin(RotVecInRad) + yValue * MaxSpeed};
+        double VectorBR[2] = {-rot * DistanceMod[3] * cos(RotVecInRad) + xValue * MaxSpeed, rot * DistanceMod[3] * sin(RotVecInRad) + yValue * MaxSpeed};
 
         // calc the speed and oriantation of the mod  (speed, direction)
-        float SwerveModValRot [4][2] = {{sqrt(pow(VectorFL[0], 2)+ pow(VectorFL[1], 2)), atan(VectorFL[0]/VectorFL[1])},
+        double SwerveModValRot [4][2] = {{sqrt(pow(VectorFL[0], 2)+ pow(VectorFL[1], 2)), atan(VectorFL[0]/VectorFL[1])},
                                             {sqrt(pow(VectorFR[0], 2)+ pow(VectorFR[1], 2)), atan(VectorFR[0]/VectorFR[1])},
                                             {sqrt(pow(VectorBL[0], 2)+ pow(VectorBL[1], 2)), atan(VectorBL[0]/VectorBL[1])},
                                             {sqrt(pow(VectorBR[0], 2)+ pow(VectorBR[1], 2)), atan(VectorBR[0]/VectorBR[1])}};
@@ -72,7 +72,7 @@ void Drivetrain::SetAllPID(){
 }
 
 // Drive with the swerve drive.
-void Drivetrain::Drive(float xValue, float yValue, float rotation){
+void Drivetrain::Drive(double xValue, double yValue, double rotation){
     // math 
     // double Speed = MathSpeed(xValue, yValue);
     // double Direction = MathDirection(xValue, yValue);
@@ -80,14 +80,14 @@ void Drivetrain::Drive(float xValue, float yValue, float rotation){
 
     auto Speed_Direction = MathSwerve(xValue, yValue, rotation);
 
-    float Speedfl = Speed_Direction[0][0];
-    float Directionfl = Speed_Direction[0][1];
-    float Speedfr = Speed_Direction[1][0];
-    float Directionfr = Speed_Direction[1][1];
-    float Speedbl = Speed_Direction[2][0];
-    float Directionbl = Speed_Direction[2][1];
-    float Speedbr = Speed_Direction[3][0];
-    float Directionbr = Speed_Direction[3][1];
+    double Speedfl = Speed_Direction[0][0];
+    double Directionfl = Speed_Direction[0][1];
+    double Speedfr = Speed_Direction[1][0];
+    double Directionfr = Speed_Direction[1][1];
+    double Speedbl = Speed_Direction[2][0];
+    double Directionbl = Speed_Direction[2][1];
+    double Speedbr = Speed_Direction[3][0];
+    double Directionbr = Speed_Direction[3][1];
   
     // // set var to calc var, this needs to change in the futere when the rot will be integrated to the sys.
     // Speedfl = Speedfr = Speedbl = Speedbr = Speed;
