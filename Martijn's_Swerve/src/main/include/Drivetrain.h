@@ -40,6 +40,7 @@ class Drivetrain{
   double prevDirection = 0;
   double Speedfl, Speedfr, Speedbl, Speedbr;
   double Directionfl, Directionfr, Directionbl, Directionbr;
+  double RotVecInRad = 45 * pi / 180;
 
   // position of the module x, y
   double PosModuleFL[2] = {-340, 273.5};

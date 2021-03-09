@@ -41,3 +41,6 @@ const double Wheel_radius = 0.0508; // meter
 const double MaxSpeed = 1;
 const double MaxRad = 1;
 
+// Math
+const double pi = 2 * acos(0.0);
+

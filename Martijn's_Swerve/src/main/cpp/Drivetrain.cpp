@@ -29,13 +29,14 @@ auto Drivetrain::MathSwerve(float xValue, float yValue, float rot){
         return SwerveModVal;
     }
     else{
+        // calc the rot speed
         rot = rot * MaxRad;
 
         // vector calc per module  (x, y) 
-        float VectorFL[2] = {rot * DistanceMod[0] * cos(45) + xValue * MaxSpeed, rot * DistanceMod[0] * sin(45) + yValue * MaxSpeed};
-        float VectorFR[2] = {rot * DistanceMod[1] * cos(45) + xValue * MaxSpeed, -rot * DistanceMod[1] * sin(45) + yValue * MaxSpeed};
-        float VectorBL[2] = {-rot * DistanceMod[2] * cos(45) + xValue * MaxSpeed, -rot * DistanceMod[2] * sin(45) + yValue * MaxSpeed};
-        float VectorBR[2] = {-rot * DistanceMod[3] * cos(45) + xValue * MaxSpeed, rot * DistanceMod[3] * sin(45) + yValue * MaxSpeed};
+        float VectorFL[2] = {rot * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rot * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
+        float VectorFR[2] = {rot * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rot * DistanceMod[1] * sin(RotVecInRad) + yValue * MaxSpeed};
+        float VectorBL[2] = {-rot * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, -rot * DistanceMod[2] * sin(RotVecInRad) + yValue * MaxSpeed};
+        float VectorBR[2] = {-rot * DistanceMod[3] * cos(RotVecInRad) + xValue * MaxSpeed, rot * DistanceMod[3] * sin(RotVecInRad) + yValue * MaxSpeed};
 
         // calc the speed and oriantation of the mod  (speed, direction)
         float SwerveModValRot [4][2] = {{sqrt(pow(VectorFL[0], 2)+ pow(VectorFL[1], 2)), atan(VectorFL[0]/VectorFL[1])},
