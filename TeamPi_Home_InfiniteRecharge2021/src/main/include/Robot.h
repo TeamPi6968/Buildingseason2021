@@ -8,9 +8,16 @@
 #include "Motors.h"
 #include "Loader.h"
 #include "Sensors.h"
+#include <frc/Timer.h>
+#include <frc/Joystick.h>
+#include "Drivetrain.h"
 
 
 class Robot : public frc::TimedRobot {
+ private:
+  Drivetrain Swerve;
+  frc::Joystick m_stick{0};	
+
  public:
   void RobotInit() override;
   void RobotPeriodic() override;

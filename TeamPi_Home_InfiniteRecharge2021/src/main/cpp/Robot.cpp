@@ -11,8 +11,14 @@ void Robot::RobotPeriodic() {}
 void Robot::AutonomousInit() {}
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() {}
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopInit() {
+  Swerve.SetAllPID();
+  Swerve.ZeroDrivetrain();
+}
+
+void Robot::TeleopPeriodic() {
+  Swerve.Drive(m_stick.GetX(), m_stick.GetY(), m_stick.GetRawAxis(5));
+}
 
 void Robot::DisabledInit() {}
 void Robot::DisabledPeriodic() {}
