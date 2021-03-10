@@ -18,15 +18,24 @@
 //   SwerveModule module_backRight{RBMotorDrive, RBMotor};
 // }
 
-auto Drivetrain::MathSwerve(double xValue, double yValue, double rot){
+void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
     if (rot == 0){
         // calc the speed and oriantation of the mod  (speed, direction)
         double SwerveModVal [4][2] = {{sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)},
                                         {sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)},
                                         {sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)},
                                         {sqrt(pow(xValue, 2)+ pow(yValue, 2)) * MaxSpeed, atan(xValue/yValue)}};
+        
+            Speedfl = SwerveModVal[0][0]*(180/pi);
+            Directionfl = SwerveModVal[0][1]*(180/pi);
+            Speedfr = SwerveModVal[1][0]*(180/pi);
+            Directionfr = SwerveModVal[1][1]*(180/pi);
+            Speedbl = SwerveModVal[2][0]*(180/pi);
+            Directionbl = SwerveModVal[2][1]*(180/pi);
+            Speedbr = SwerveModVal[3][0]*(180/pi);
+            Directionbr = SwerveModVal[3][1]*(180/pi);
 
-        return SwerveModVal;
+        
     }
     else{
         // calc the rot speed
@@ -44,7 +53,14 @@ auto Drivetrain::MathSwerve(double xValue, double yValue, double rot){
                                             {sqrt(pow(VectorBL[0], 2)+ pow(VectorBL[1], 2)), atan(VectorBL[0]/VectorBL[1])},
                                             {sqrt(pow(VectorBR[0], 2)+ pow(VectorBR[1], 2)), atan(VectorBR[0]/VectorBR[1])}};
 
-        return SwerveModValRot;
+            Speedfl = SwerveModValRot[0][0]*(180/pi);
+            Directionfl = SwerveModValRot[0][1]*(180/pi);
+            Speedfr = SwerveModValRot[1][0]*(180/pi);
+            Directionfr = SwerveModValRot[1][1]*(180/pi);
+            Speedbl = SwerveModValRot[2][0]*(180/pi);
+            Directionbl = SwerveModValRot[2][1]*(180/pi);
+            Speedbr = SwerveModValRot[3][0]*(180/pi);
+            Directionbr = SwerveModValRot[3][1]*(180/pi);
     }
 }
 
@@ -77,22 +93,30 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
     // double Speed = MathSpeed(xValue, yValue);
     // double Direction = MathDirection(xValue, yValue);
     // prevDirection = Direction;
+    MathSwerve(xValue, yValue, rotation);
+    // cout <<  Speed_Direction << "\n";
+    // Speedfl = Speed_Direction[0][0];
+    // cout << "after set val1" << "\n";
+    // Directionfl = Speed_Direction[0][1];
+    // cout << "after set val1" << "\n";
+    // Speedfr = Speed_Direction[1][0];
+    // cout << "after set val2" << "\n";
+    // Directionfr = Speed_Direction[1][1];
+    // cout << "after set val2" << "\n";
+    // Speedbl = Speed_Direction[2][0];
+    // cout << "after set val3" << "\n";
+    // Directionbl = Speed_Direction[2][1];
+    // cout << "after set val3" << "\n";
+    // Speedbr = Speed_Direction[3][0];
+    // cout << "after set val4" << "\n";
+    // Directionbr = Speed_Direction[3][1];
 
-    auto Speed_Direction = MathSwerve(xValue, yValue, rotation);
-
-    Speedfl = Speed_Direction[0][0];
-    Directionfl = Speed_Direction[0][1];
-    Speedfr = Speed_Direction[1][0];
-    Directionfr = Speed_Direction[1][1];
-    Speedbl = Speed_Direction[2][0];
-    Directionbl = Speed_Direction[2][1];
-    Speedbr = Speed_Direction[3][0];
-    Directionbr = Speed_Direction[3][1];
   
     // // set var to calc var, this needs to change in the futere when the rot will be integrated to the sys.
     // Speedfl = Speedfr = Speedbl = Speedbr = Speed;
     // Directionfl = Directionfr = Directionbl = Directionbr = Direction; 
-
+ 
+    cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n"; 
     module_frontLeft.SetDesiredState(Speedfl, Directionfl);
     module_frontRight.SetDesiredState(Speedfr, Directionfr);
     module_backLeft.SetDesiredState(Speedbl, Directionbl);

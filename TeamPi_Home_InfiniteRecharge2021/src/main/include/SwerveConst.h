@@ -9,11 +9,11 @@
 #pragma once
 
 // Declare PID values
-const double kP_Drive = 0.5;
+const double kP_Drive = 1;
 const double kI_Drive = 0;
 const double kD_Drive = 0.1;
 
-const double kP_Turning = 0.5;
+const double kP_Turning = 1;
 const double kI_Turning = 0;
 const double kD_Turning = 0.1;
 
@@ -30,7 +30,7 @@ const int RBMotorDrive = 7;
 
 // Declare encoder var
 const int EncoderResolution = 2048;
-const int TimeOut = 60;
+const int TimeOut = 50;
 
 // Declare gear ratio
 const double Turning_ratio = 0.047619047619047619;
@@ -38,7 +38,7 @@ const double Drive_ratio = 0.040178571428;
 const double Wheel_radius = 0.0508; // meter
 
 // Max speed
-const double MaxSpeed = 1;
+const double MaxSpeed = 3;
 const double MaxRad = 1;
 
 // Math

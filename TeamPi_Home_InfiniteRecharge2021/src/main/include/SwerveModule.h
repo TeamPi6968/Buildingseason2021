@@ -32,7 +32,8 @@ class SwerveModule{
     WPI_TalonFX TurningMotor; 
 
     // coef for the motors
-    double DriveCoef = Drive_ratio*2 *pi / EncoderResolution;
-    double TurnCoef = Turning_ratio*2 *pi / EncoderResolution;
+    double DriveCoef = Drive_ratio* 360 * Wheel_radius / EncoderResolution;
+    double TurnCoef = Turning_ratio* 360 / EncoderResolution;
+    
 
 };
