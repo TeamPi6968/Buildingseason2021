@@ -17,7 +17,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-  Swerve.Drive(m_stick.GetX(), m_stick.GetY(), m_stick.GetRawAxis(5));
+  Swerve.Drive(m_stick.GetX(), m_stick.GetY(), m_stick.GetRawAxis(4));
 }
 
 void Robot::DisabledInit() {}
