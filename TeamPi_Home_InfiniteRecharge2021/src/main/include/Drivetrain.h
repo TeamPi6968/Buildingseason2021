@@ -22,7 +22,7 @@ class Drivetrain{
   // Set all the swerve wheel direction back to 0.
   void DrivetrainHome();
   // some math for the swerve drive.
-  // double MathSpeed(double xVal, double yVal);
+  double MathSpeed(double xVal, double yVal);
   // double MathDirection(double xVal, double yVal);
   void MathSwerve(double xValue, double yValue, double rot);
   // Drive with the swerve drive, uses the x and y values of the stick.

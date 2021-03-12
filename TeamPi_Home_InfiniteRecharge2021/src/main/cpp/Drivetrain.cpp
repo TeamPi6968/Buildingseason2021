@@ -11,11 +11,11 @@
 #include "Drivetrain.h" 
 
 // Drivetrain::Drivetrain(){
-// // create the swervedrive modules.
-//   SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
-//   SwerveModule module_frontRight{RFMotorDrive, RFMotor};
-//   SwerveModule module_backLeft{LBMotorDrive, LBMotor};
-//   SwerveModule module_backRight{RBMotorDrive, RBMotor};
+// create the swervedrive modules.
+  SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
+  SwerveModule module_frontRight{RFMotorDrive, RFMotor};
+  SwerveModule module_backLeft{LBMotorDrive, LBMotor};
+  SwerveModule module_backRight{RBMotorDrive, RBMotor};
 // }
 
 void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
@@ -43,8 +43,8 @@ void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
 
         // vector calc per module  (x, y) 
         double VectorFL[2] = {rotVel * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[2] * sin(RotVecInRad) + yValue * MaxSpeed};
+        double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * -sin(RotVecInRad) + yValue * MaxSpeed};
+        double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[2] * -sin(RotVecInRad) + yValue * MaxSpeed};
         double VectorBR[2] = {-rotVel * DistanceMod[3] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[3] * sin(RotVecInRad) + yValue * MaxSpeed};
 
         // calc the speed and oriantation of the mod  (speed, direction)
@@ -89,7 +89,7 @@ void Drivetrain::SetAllPID(){
 
 // Drive with the swerve drive.
 void Drivetrain::Drive(double xValue, double yValue, double rotation){
-    // math 
+
     // double Speed = MathSpeed(xValue, yValue);
     // double Direction = MathDirection(xValue, yValue);
     // prevDirection = Direction;
@@ -123,9 +123,9 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
     module_backRight.SetDesiredState(Speedbr, Directionbr);
 }
 
-// // math for driving with the serve.
+// math for driving with the serve.
 // double Drivetrain::MathSpeed(double xVal, double yVal){
-//     if (xVal < 0){xVal = -xVal;}
+//     // if (xVal < 0){xVal = -xVal;}
 //     if (yVal < 0){yVal = -yVal;}
 
 //     double speed = sqrt(pow(xVal,2) + pow(yVal,2));
@@ -137,7 +137,7 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
 //     return speed;
 // }
 
-// // math for driving with the serve.
+// math for driving with the serve.
 // double Drivetrain::MathDirection(double xVal, double yVal){
 //     double Angle = 0;
     
