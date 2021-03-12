@@ -131,7 +131,7 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
 
     // math
     MathSwerve(xValue, yValue, rotation);
-    // compareValue();
+    compareValue();
 
     cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n"; 
     module_frontLeft.SetDesiredState(Speedfl, Directionfl);
@@ -143,10 +143,10 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
 void Drivetrain::compareValue(){
         
         if(PrevDirectionfl > 240 && Directionfl < -70){
-            AngleCorrectionFl = AngleCorrectionFl + 360;
+            AngleCorrectionFl = 360 + AngleCorrectionFl;
         }
         else if (PrevDirectionfl < -60 && Directionfl > 250){
-            AngleCorrectionFl = AngleCorrectionFl - 360;
+            AngleCorrectionFl = (-360) + AngleCorrectionFl;
         }
         PrevDirectionfl = Directionfl = Directionfl + AngleCorrectionFl;
 
