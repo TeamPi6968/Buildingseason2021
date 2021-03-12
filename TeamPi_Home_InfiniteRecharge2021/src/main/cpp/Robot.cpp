@@ -12,12 +12,17 @@ void Robot::AutonomousInit() {}
 void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {
+  
+  frc::DoubleSolenoid anotherDoubleSolenoid{0, 1, 2};
+  
+  anotherDoubleSolenoid.Set(frc::DoubleSolenoid::Value::kForward);
+  
   Swerve.SetAllPID();
   Swerve.ZeroDrivetrain();
 }
 
 void Robot::TeleopPeriodic() {
-  Swerve.Drive(m_stick.GetX(), m_stick.GetY(), m_stick.GetRawAxis(4));
+  Swerve.Drive(-m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
 }
 
 void Robot::DisabledInit() {}

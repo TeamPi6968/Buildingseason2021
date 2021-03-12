@@ -25,6 +25,7 @@ class Drivetrain{
   // double MathSpeed(double xVal, double yVal);
   // double MathDirection(double xVal, double yVal);
   void MathSwerve(double xValue, double yValue, double rot);
+  void compareValue();
   // Drive with the swerve drive, uses the x and y values of the stick.
   void Drive(double xValue, double yValue, double rotation);
 
@@ -54,6 +55,10 @@ class Drivetrain{
   double DistanceModBR = sqrt(pow(PosModuleBR[0],2)+pow(PosModuleBR[1],2));
 
   double DistanceMod[4] = {DistanceModFL, DistanceModFR, DistanceModBL, DistanceModBR};
+
+  double PrevDirectionfl = 0;
+
+  double AngleCorrectionFl = 0;
   
   
 };

@@ -45,6 +45,6 @@ void SwerveModule::SwerveHome(){
 
 // set the desired state of the motor, speed/ pos.
 void SwerveModule::SetDesiredState(double SpeedMod, double DirectionMod){
-    TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
-    DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
+    TurningMotor.Set(ControlMode::Position,  1* DirectionMod);
+    DriveMotor.Set(ControlMode::Velocity, SpeedMod);
 }
