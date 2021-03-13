@@ -134,7 +134,8 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
     // AngleCorrection();
 
     cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n"; 
-    module_frontLeft.SetDesiredState(Speedfl, Directionfl);
+    module_frontLeft.SetDesiredState(Speedfl, Directionfl + AngleCorrectionFl);
+     cout << AngleCorrectionFl << "\n";
     module_frontRight.SetDesiredState(Speedfr, Directionfr);
     module_backLeft.SetDesiredState(Speedbl, Directionbl);
     module_backRight.SetDesiredState(Speedbr, Directionbr);
@@ -144,10 +145,10 @@ void Drivetrain::AngleCorrection(){
 // clean this code up
     cout << PrevDirectionfl << "\n";
 
-        if(PrevDirectionfl > 240 && Directionfl < -70){
+        if(PrevDirectionfl > 180 && Directionfl < 0){
             AngleCorrectionFl = AngleCorrectionFl + 360 ;
         }
-        else if (PrevDirectionfl < -60 && Directionfl > 250){
+        else if (PrevDirectionfl < 0 && Directionfl > 180){
             AngleCorrectionFl = AngleCorrectionFl - 360 ;
         }
         PrevDirectionfl = Directionfl;
