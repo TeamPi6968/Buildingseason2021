@@ -47,7 +47,7 @@ void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
         
     }
     else if (rot < 0){
-                // calc the rot speed
+        // calc the rot speed
         double rotVel = rot * MaxRad;
 
         // vector calc per module  (x, y) 
@@ -131,7 +131,7 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
 
     // math
     MathSwerve(xValue, yValue, rotation);
-    compareValue();
+    // AngleCorrection();
 
     cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n"; 
     module_frontLeft.SetDesiredState(Speedfl, Directionfl);
@@ -140,14 +140,40 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
     module_backRight.SetDesiredState(Speedbr, Directionbr);
 }
 
-void Drivetrain::compareValue(){
-        
+void Drivetrain::AngleCorrection(){
+// clean this code up
+    cout << PrevDirectionfl << "\n";
+
         if(PrevDirectionfl > 240 && Directionfl < -70){
-            AngleCorrectionFl = 360 + AngleCorrectionFl;
+            AngleCorrectionFl = AngleCorrectionFl + 360 ;
         }
         else if (PrevDirectionfl < -60 && Directionfl > 250){
-            AngleCorrectionFl = (-360) + AngleCorrectionFl;
+            AngleCorrectionFl = AngleCorrectionFl - 360 ;
         }
-        PrevDirectionfl = Directionfl = Directionfl + AngleCorrectionFl;
+        PrevDirectionfl = Directionfl;
+//-------------------------------------------------------
+        if(PrevDirectionfr > 240 && Directionfr < -70){
+            AngleCorrectionFr = AngleCorrectionFr + 360 ;
+        }
+        else if (PrevDirectionfr < -60 && Directionfr > 250){
+            AngleCorrectionFr = AngleCorrectionFr - 360 ;
+        }
+        PrevDirectionfl = Directionfl;
+//------------------------------------------------------
+        if(PrevDirectionbl > 240 && Directionbl < -70){
+            AngleCorrectionBl = AngleCorrectionBl + 360 ;
+        }
+        else if (PrevDirectionbl < -60 && Directionbl > 250){
+            AngleCorrectionFl = AngleCorrectionFl - 360 ;
+        }
+        PrevDirectionbl = Directionbl;
+//-----------------------------------------------------
+        if(PrevDirectionbr > 240 && Directionbr < -70){
+            AngleCorrectionBr = AngleCorrectionBr + 360 ;
+        }
+        else if (PrevDirectionbr < -60 && Directionbr > 250){
+            AngleCorrectionBr = AngleCorrectionBr - 360 ;
+        }
+        PrevDirectionbr = Directionbr;
 
 }
