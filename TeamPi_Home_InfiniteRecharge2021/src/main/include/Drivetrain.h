@@ -38,7 +38,6 @@ class Drivetrain{
   SwerveModule module_backRight{RBMotorDrive, RBMotor};
 
   // var
-  double prevDirection = 0;
   double Speedfl, Speedfr, Speedbl, Speedbr;
   double Directionfl, Directionfr, Directionbl, Directionbr;
   double RotVecInRad = 45 * pi / 180;
@@ -65,6 +64,11 @@ class Drivetrain{
   double AngleCorrectionFr = 0;
   double AngleCorrectionBl = 0;
   double AngleCorrectionBr = 0;
+
+  double prevX = 0;
+  double prevY = 0;
+  double prevRotation = 0;
+  int Move = 0; 
   
   
 };

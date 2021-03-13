@@ -38,7 +38,7 @@ const double Drive_ratio = 0.040178571428;
 const double Wheel_radius = 0.0508; // meter
 
 // Max speed
-const double MaxSpeed = 3;
+const double MaxSpeed = 12;
 const double MaxRad = 5;
 
 // Math

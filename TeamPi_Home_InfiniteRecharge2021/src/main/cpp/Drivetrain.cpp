@@ -101,6 +101,22 @@ void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
 
 // zero all the modules.
 void Drivetrain::ZeroDrivetrain(){
+
+  prevX = 0;
+  prevY = 0;
+  prevRotation = 0;
+  Move = 0;
+
+    PrevDirectionfl = 0;
+    PrevDirectionfr = 0;
+    PrevDirectionbl = 0;
+    PrevDirectionbr = 0;
+
+    AngleCorrectionFl = 0;
+    AngleCorrectionFr = 0;
+    AngleCorrectionBl = 0;
+    AngleCorrectionBr = 0;
+
     module_frontLeft.SwerveZero();
     module_frontRight.SwerveZero();
     module_backLeft.SwerveZero();
@@ -129,16 +145,26 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
     if (xValue < 0.1 && xValue > 0 || xValue > -0.1 && xValue < 0 ){xValue = 0;}
     if (yValue < 0.1 && yValue > 0 || yValue > -0.1 && yValue < 0 ){yValue = 0;}
 
+    if (xValue == 0 && yValue == 0 && rotation == 0){xValue = prevX; yValue = prevY; rotation = prevRotation; Move = 0;}
+    else
+    {
+        prevX = xValue;
+        prevY = yValue;
+        prevRotation = rotation;
+        Move = 1;
+    }
+    
+
     // math
     MathSwerve(xValue, yValue, rotation);
     AngleCorrection();
 
     cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n"; 
-    module_frontLeft.SetDesiredState(Speedfl, (Directionfl + AngleCorrectionFl));
-     cout << "thing" << AngleCorrectionFl << "\n";
-    module_frontRight.SetDesiredState(Speedfr, Directionfr + AngleCorrectionFr);
-    module_backLeft.SetDesiredState(Speedbl, Directionbl + AngleCorrectionBl);
-    module_backRight.SetDesiredState(Speedbr, Directionbr + AngleCorrectionBr);
+    module_frontLeft.SetDesiredState(Speedfl * Move, Directionfl + AngleCorrectionFl);
+     cout << "thing: " << Directionfl + AngleCorrectionFl << "\n";
+    module_frontRight.SetDesiredState(Speedfr * Move, Directionfr + AngleCorrectionFr);
+    module_backLeft.SetDesiredState(Speedbl * Move, Directionbl + AngleCorrectionBl);
+    module_backRight.SetDesiredState(Speedbr * Move, Directionbr + AngleCorrectionBr);
 }
 
 void Drivetrain::AngleCorrection(){
