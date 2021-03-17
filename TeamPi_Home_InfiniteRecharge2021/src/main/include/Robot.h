@@ -5,18 +5,26 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
+#include <frc/Timer.h>
+#include <frc/Joystick.h>
+
 #include "Motors.h"
 #include "Loader.h"
 #include "Sensors.h"
-#include <frc/Timer.h>
-#include <frc/Joystick.h>
 #include "Drivetrain.h"
+#include "Intake.h"
+#include <frc/DigitalInput.h>
 
 
 class Robot : public frc::TimedRobot {
  private:
   Drivetrain Swerve;
   frc::Joystick m_stick{0};	
+  Intake ModIntake;
+  Loader ModTurret;
+  Loader test;
+  DigitalInput IRSensor {2};// pin 2 for IR sensor
+  
 
  public:
   void RobotInit() override;

@@ -12,7 +12,7 @@
 
 // Drivetrain::Drivetrain(){
 // // create the swervedrive modules.
-//   SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
+   SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
 //   SwerveModule module_frontRight{RFMotorDrive, RFMotor};
 //   SwerveModule module_backLeft{LBMotorDrive, LBMotor};
 //   SwerveModule module_backRight{RBMotorDrive, RBMotor};
@@ -116,7 +116,7 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
     // Speedfl = Speedfr = Speedbl = Speedbr = Speed;
     // Directionfl = Directionfr = Directionbl = Directionbr = Direction; 
  
-    cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n"; 
+    // cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n"; 
     module_frontLeft.SetDesiredState(Speedfl, Directionfl);
     module_frontRight.SetDesiredState(Speedfr, Directionfr);
     module_backLeft.SetDesiredState(Speedbl, Directionbl);

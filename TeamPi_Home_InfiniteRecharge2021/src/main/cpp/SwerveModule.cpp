@@ -18,7 +18,6 @@ SwerveModule::SwerveModule(int DriveMotorID, int TurningMotorID)
     // set the desired coef to the motor.
     DriveMotor.ConfigSelectedFeedbackCoefficient(DriveCoef, 0, TimeOut);
     TurningMotor.ConfigSelectedFeedbackCoefficient(TurnCoef, 0, TimeOut);
-
 }
 
 void SwerveModule::SetPID(){
@@ -48,3 +47,10 @@ void SwerveModule::SetDesiredState(double SpeedMod, double DirectionMod){
     TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
     DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
 }
+
+
+// void ServeModule::AutonomousDrive (int DistanceToDrive, int AngleOfWheels)
+// {
+//     TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
+//     DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
+//     }
