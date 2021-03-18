@@ -2,17 +2,17 @@
   * Author: Martijn van de Sande
   * Year: 2021
   * Date: 06-03-2021 // created
-  * 
+  *
   * Edit: 07-03-2021 // added some basic math to test driving the swerve bot.
-  * 
+  *
   * Remarks: Create the modules and functions to drive with the swerve bot.
 **/
 
-#include "Drivetrain.h" 
+#include "Drivetrain.h"
 
 // Drivetrain::Drivetrain(){
 // // create the swervedrive modules.
-//   SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
+   SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
 //   SwerveModule module_frontRight{RFMotorDrive, RFMotor};
 //   SwerveModule module_backLeft{LBMotorDrive, LBMotor};
 //   SwerveModule module_backRight{RBMotorDrive, RBMotor};
@@ -23,7 +23,7 @@ void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
         // calc the rot speed
         double rotVel = rot * MaxRad;
 
-        // vector calc per module  (x, y) 
+        // vector calc per module  (x, y)
         double VectorFL[2] = {rotVel * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
         double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * sin(RotVecInRad) + yValue * MaxSpeed};
         double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[2] * sin(RotVecInRad) + yValue * MaxSpeed};
@@ -44,13 +44,13 @@ void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
             Speedbr = SwerveModValRot[3][0]*(180/pi);
             Directionbr = SwerveModValRot[3][1]*(180/pi)+180;
 
-        
+
     }
     else if (rot < 0){
         // calc the rot speed
         double rotVel = rot * MaxRad;
 
-        // vector calc per module  (x, y) 
+        // vector calc per module  (x, y)
         double VectorFL[2] = {rotVel * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
         double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * sin(RotVecInRad) + yValue * MaxSpeed};
         double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[2] * sin(RotVecInRad) + yValue * MaxSpeed};
@@ -76,7 +76,7 @@ void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
         // calc the rot speed
         double rotVel = rot * MaxRad;
 
-        // vector calc per module  (x, y) 
+        // vector calc per module  (x, y)
         double VectorFL[2] = {rotVel * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
         double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * sin(RotVecInRad) + yValue * MaxSpeed};
         double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[2] * sin(RotVecInRad) + yValue * MaxSpeed};
@@ -153,13 +153,13 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
         prevRotation = rotation;
         Move = 1;
     }
-    
+
 
     // math
     MathSwerve(xValue, yValue, rotation);
     AngleCorrection();
 
-    cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n"; 
+    cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n";
     module_frontLeft.SetDesiredState(Speedfl * Move, Directionfl + AngleCorrectionFl);
      cout << "thing: " << Directionfl + AngleCorrectionFl << "\n";
     module_frontRight.SetDesiredState(Speedfr * Move, Directionfr + AngleCorrectionFr);

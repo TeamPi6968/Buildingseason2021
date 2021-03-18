@@ -18,6 +18,7 @@
   "files.associations": {
     "iostream": "cpp",
     "ostream": "cpp",
-    "cmath": "cpp"
+    "cmath": "cpp",
+    "istream": "cpp"
   }
 }

@@ -27,6 +27,11 @@ class SwerveModule{
     // Set swerve to desired pos/ speed.
     void SetDesiredState(double speed, double Direction);
 
+
+
+   //function for hard coded autonomous part to drive.
+   // void AutonomousDrive (int DistanceToDrive, int AngleOfWheels)
+
  private:
     WPI_TalonFX DriveMotor;
     WPI_TalonFX TurningMotor; 
@@ -35,5 +40,4 @@ class SwerveModule{
     double DriveCoef = Drive_ratio* 360 * Wheel_radius / EncoderResolution;
     double TurnCoef = Turning_ratio* 360 / EncoderResolution;
     
-
 };

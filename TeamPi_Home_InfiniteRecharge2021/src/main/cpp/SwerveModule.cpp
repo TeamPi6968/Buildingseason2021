@@ -2,7 +2,7 @@
   * Author: Martijn van de Sande
   * Year: 2021
   * Date: 06-03-2021 // created
-  * 
+  *
   * Remarks: Configre the motors of the modules and set its desired state.
 **/
 
@@ -18,7 +18,6 @@ SwerveModule::SwerveModule(int DriveMotorID, int TurningMotorID)
     // set the desired coef to the motor.
     DriveMotor.ConfigSelectedFeedbackCoefficient(DriveCoef, 0, TimeOut);
     TurningMotor.ConfigSelectedFeedbackCoefficient(TurnCoef, 0, TimeOut);
-
 }
 
 void SwerveModule::SetPID(){
@@ -35,7 +34,7 @@ void SwerveModule::SetPID(){
 
 // zero the encoders of the swerve module.
 void SwerveModule::SwerveZero(){
-    TurningMotor.SetSelectedSensorPosition(0, 0, TimeOut); 
+    TurningMotor.SetSelectedSensorPosition(0, 0, TimeOut);
 }
 
 // set the motor back to its zero pos.
@@ -45,6 +44,13 @@ void SwerveModule::SwerveHome(){
 
 // set the desired state of the motor, speed/ pos.
 void SwerveModule::SetDesiredState(double SpeedMod, double DirectionMod){
-    TurningMotor.Set(ControlMode::Position,  1* DirectionMod);
-    DriveMotor.Set(ControlMode::Velocity, SpeedMod);
+    TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
+    DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
 }
+
+
+// void ServeModule::AutonomousDrive (int DistanceToDrive, int AngleOfWheels)
+// {
+//     TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
+//     DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
+//     }
