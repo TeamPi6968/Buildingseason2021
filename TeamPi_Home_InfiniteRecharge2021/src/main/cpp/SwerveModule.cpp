@@ -2,7 +2,7 @@
   * Author: Martijn van de Sande
   * Year: 2021
   * Date: 06-03-2021 // created
-  * 
+  *
   * Remarks: Configre the motors of the modules and set its desired state.
 **/
 
@@ -34,7 +34,7 @@ void SwerveModule::SetPID(){
 
 // zero the encoders of the swerve module.
 void SwerveModule::SwerveZero(){
-    TurningMotor.SetSelectedSensorPosition(0, 0, TimeOut); 
+    TurningMotor.SetSelectedSensorPosition(0, 0, TimeOut);
 }
 
 // set the motor back to its zero pos.

@@ -22,9 +22,10 @@ class Drivetrain{
   // Set all the swerve wheel direction back to 0.
   void DrivetrainHome();
   // some math for the swerve drive.
-  // double MathSpeed(double xVal, double yVal);
+  double MathSpeed(double xVal, double yVal);
   // double MathDirection(double xVal, double yVal);
   void MathSwerve(double xValue, double yValue, double rot);
+  void AngleCorrection();
   // Drive with the swerve drive, uses the x and y values of the stick.
   void Drive(double xValue, double yValue, double rotation);
 
@@ -37,7 +38,6 @@ class Drivetrain{
   SwerveModule module_backRight{RBMotorDrive, RBMotor};
 
   // var
-  double prevDirection = 0;
   double Speedfl, Speedfr, Speedbl, Speedbr;
   double Directionfl, Directionfr, Directionbl, Directionbr;
   double RotVecInRad = 45 * pi / 180;
@@ -54,6 +54,21 @@ class Drivetrain{
   double DistanceModBR = sqrt(pow(PosModuleBR[0],2)+pow(PosModuleBR[1],2));
 
   double DistanceMod[4] = {DistanceModFL, DistanceModFR, DistanceModBL, DistanceModBR};
+
+  double PrevDirectionfl = 0;
+  double PrevDirectionfr = 0;
+  double PrevDirectionbl = 0;
+  double PrevDirectionbr = 0;
+
+  double AngleCorrectionFl = 0;
+  double AngleCorrectionFr = 0;
+  double AngleCorrectionBl = 0;
+  double AngleCorrectionBr = 0;
+
+  double prevX = 0;
+  double prevY = 0;
+  double prevRotation = 0;
+  int Move = 0; 
   
   
 };

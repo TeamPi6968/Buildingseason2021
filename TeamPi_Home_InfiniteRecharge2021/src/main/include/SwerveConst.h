@@ -30,7 +30,7 @@ const int RBMotorDrive = 7;
 
 // Declare encoder var
 const int EncoderResolution = 2048;
-const int TimeOut = 50;
+const int TimeOut = 60;
 
 // Declare gear ratio
 const double Turning_ratio = 0.047619047619047619;
@@ -38,8 +38,8 @@ const double Drive_ratio = 0.040178571428;
 const double Wheel_radius = 0.0508; // meter
 
 // Max speed
-const double MaxSpeed = 3;
-const double MaxRad = 1;
+const double MaxSpeed = 12;
+const double MaxRad = 5;
 
 // Math
 const double pi = 2 * acos(0.0);
