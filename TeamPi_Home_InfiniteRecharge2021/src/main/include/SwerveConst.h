@@ -13,9 +13,9 @@ const double kP_Drive = 1;
 const double kI_Drive = 0;
 const double kD_Drive = 0.1;
 
-const double kP_Turning = 1;
-const double kI_Turning = 0;
-const double kD_Turning = 0.1;
+const double kP_Turning = 1.1;
+const double kI_Turning = 0.002;
+const double kD_Turning = 0.9;
 
 // Declare Motor ID's
 const int LFMotor = 2;
