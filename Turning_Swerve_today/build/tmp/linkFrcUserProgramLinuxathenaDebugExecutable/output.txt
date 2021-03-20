@@ -1,0 +1,4 @@
+See file:///C:/Users/milan/Documents/GitHub/Buildingseason2021/Turning_Swerve_today/build/tmp/linkFrcUserProgramLinuxathenaDebugExecutable/output.txt for all output for linkFrcUserProgramLinuxathenaDebugExecutable.
+linking frcUserProgram successful.
+
+Finished linkFrcUserProgramLinuxathenaDebugExecutable, see full log file:///C:/Users/milan/Documents/GitHub/Buildingseason2021/Turning_Swerve_today/build/tmp/linkFrcUserProgramLinuxathenaDebugExecutable/output.txt.
