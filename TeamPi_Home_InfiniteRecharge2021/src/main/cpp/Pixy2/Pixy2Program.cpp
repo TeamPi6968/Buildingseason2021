@@ -1,4 +1,4 @@
-#include "Pixy2Program.h"
+#include "Pixy2/Pixy2Program.h"
 
 Pixy2Program::Pixy2Program(/* args */)
 {

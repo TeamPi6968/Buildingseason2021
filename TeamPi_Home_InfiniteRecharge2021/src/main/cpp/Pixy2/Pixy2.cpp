@@ -1,4 +1,4 @@
-#include "Pixy2.h"
+#include "Pixy2/Pixy2.h"
 
 /**
  * Constructs Pixy2 object with supplied communication link

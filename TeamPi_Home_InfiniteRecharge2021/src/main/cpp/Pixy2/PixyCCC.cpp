@@ -1,4 +1,4 @@
-#include "Pixy2CCC.h"
+#include "Pixy2/Pixy2CCC.h"
 
 
 Pixy2CCC::Pixy2CCC(Pixy2 *pixy)

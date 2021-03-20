@@ -12,7 +12,7 @@
 #include "SwerveDrive/Drivetrain.h"
 #include "Intake.h"
 
-#include <Pixy2CCC.h>
+#include <Pixy2/Pixy2CCC.h>
 //#include <PixyProgram.h>
 
 

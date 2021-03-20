@@ -1,4 +1,4 @@
-#include "Pixy2Utils.h"
+#include "Pixy2/Pixy2Utils.h"
 
 /**
  * Adds byte to checksum

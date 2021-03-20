@@ -1,4 +1,4 @@
-#include "SPI_Link.h"
+#include "Pixy2/SPI_Link.h"
 
 
 SPI_Link::SPI_Link(/* args */)

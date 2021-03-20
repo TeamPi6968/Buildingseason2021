@@ -1,4 +1,4 @@
-#include "Pixy2Video.h"
+#include "Pixy2/Pixy2Video.h"
 
 
 /**
