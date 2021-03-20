@@ -6,7 +6,7 @@
   * Remarks: Configre the motors of the modules and set its desired state.
 **/
 
-#include "SwerveModule.h"
+#include "SwerveDrive/SwerveModule.h"
 
 SwerveModule::SwerveModule(int DriveMotorID, int TurningMotorID)
                             : DriveMotor(DriveMotorID), TurningMotor(TurningMotorID){
