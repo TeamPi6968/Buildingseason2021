@@ -10,16 +10,8 @@
 
 #include "Drivetrain.h"
 
-// Drivetrain::Drivetrain(){
-// // create the swervedrive modules.
-//    SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
-//   SwerveModule module_frontRight{RFMotorDrive, RFMotor};
-//   SwerveModule module_backLeft{LBMotorDrive, LBMotor};
-//   SwerveModule module_backRight{RBMotorDrive, RBMotor};
-// }
-
 void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
-    // calc the rot speed
+    // calc the rotation speed
     double rotVel = rot * MaxRad;
 
     // vector calc per module  (x, y)
@@ -34,8 +26,9 @@ void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
                                         {sqrt(pow(VectorBL[0], 2)+ pow(VectorBL[1], 2)), atan2(VectorBL[1], VectorBL[0])},
                                         {sqrt(pow(VectorBR[0], 2)+ pow(VectorBR[1], 2)), atan2(VectorBR[1], VectorBR[0])}};
 
+    // assing all the values of the calculations to the correct module.
     Speedfl = SwerveModValRot[0][0]*(180/pi);
-    Directionfl = SwerveModValRot[0][1]*(180/pi) -90;
+    Directionfl = SwerveModValRot[0][1]*(180/pi) -90; // <- fix this thing. (-90)
     Speedfr = SwerveModValRot[1][0]*(180/pi);
     Directionfr = SwerveModValRot[1][1]*(180/pi) -90;
     Speedbl = SwerveModValRot[2][0]*(180/pi);
@@ -47,11 +40,12 @@ void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
 
 // zero all the modules.
 void Drivetrain::ZeroDrivetrain(){
-
-  prevX = 0;
-  prevY = 0;
-  prevRotation = 0;
-  Move = 0;
+// define values for the driving function.
+{
+    prevX = 0;
+    prevY = 0;
+    prevRotation = 0;
+    Move = 0;
 
     PrevDirectionfl = 0;
     PrevDirectionfr = 0;
@@ -62,7 +56,9 @@ void Drivetrain::ZeroDrivetrain(){
     AngleCorrectionFr = 0;
     AngleCorrectionBl = 0;
     AngleCorrectionBr = 0;
-
+}
+    
+    // Set all the encoders to 0.
     module_frontLeft.SwerveZero();
     module_frontRight.SwerveZero();
     module_backLeft.SwerveZero();
@@ -77,6 +73,7 @@ void Drivetrain::DrivetrainHome(){
     module_backRight.SwerveHome();
 }
 
+// Set all PID values for each module.
 void Drivetrain::SetAllPID(){
     module_frontLeft.SetPID();
     module_frontRight.SetPID();
@@ -86,11 +83,13 @@ void Drivetrain::SetAllPID(){
 
 // Drive with the swerve drive.
 void Drivetrain::Drive(double xValue, double yValue, double rotation){
+
     // Get rid of deadzone controller
     if (rotation < 0.1 && rotation > 0 || rotation > -0.1 && rotation < 0 ){rotation = 0;}
     if (xValue < 0.1 && xValue > 0 || xValue > -0.1 && xValue < 0 ){xValue = 0;}
     if (yValue < 0.1 && yValue > 0 || yValue > -0.1 && yValue < 0 ){yValue = 0;}
 
+    // function so when the stick is zero the wheels keep the same angle.
     if (xValue == 0 && yValue == 0 && rotation == 0){xValue = prevX; yValue = prevY; rotation = prevRotation; Move = 0;}
     else
     {
@@ -101,36 +100,31 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
     }
 
 
-    // math
+    // math, calculate the angele and speed of each module
     MathSwerve(xValue, yValue, rotation);
     AngleCorrection();
-
-    static double setpoint = 0;
 
     //visualisation rotation speed
     frc::SmartDashboard::PutNumber("Direction_FL", Directionfl + AngleCorrectionFl);
     frc::SmartDashboard::PutNumber("Direction_FR", Directionfr + AngleCorrectionFr);
     frc::SmartDashboard::PutNumber("Direction_BL", Directionbl + AngleCorrectionBl);
     frc::SmartDashboard::PutNumber("Direction_BR", Directionbr + AngleCorrectionBr);
-
-    // setpoint= frc::SmartDashboard::GetNumber("Setpoint", setpoint);
-
-
     cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n";
+   
+    // Set the desired state of the position and speed of each module.
     module_frontLeft.SetDesiredState(Speedfl * Move, Directionfl + AngleCorrectionFl);
-    // cout << "thing: " << Directionfl + AngleCorrectionFl << "\n";
     module_frontRight.SetDesiredState(Speedfr * Move, Directionfr + AngleCorrectionFr);
     module_backLeft.SetDesiredState(Speedbl * Move, Directionbl + AngleCorrectionBl);
     module_backRight.SetDesiredState(Speedbr * Move, Directionbr + AngleCorrectionBr);
-
 }
 
+// This function makes the rotation of the stick continous. 
 void Drivetrain::AngleCorrection(){
 // clean this code up
 int idk1 = -180;
 int idk2 = 0;
     cout << PrevDirectionfl << "\n";
-
+// corection for module 1 ------------------------------
         if(PrevDirectionfl > idk2 && Directionfl < 0){
             AngleCorrectionFl = AngleCorrectionFl + 360 ;
         }
@@ -138,7 +132,7 @@ int idk2 = 0;
             AngleCorrectionFl = AngleCorrectionFl - 360 ;
         }
         PrevDirectionfl = Directionfl;
-//-------------------------------------------------------
+// corection for module 2 ------------------------------
         if(PrevDirectionfr > idk2 && Directionfr < 0){
             AngleCorrectionFr = AngleCorrectionFr + 360 ;
         }
@@ -146,7 +140,7 @@ int idk2 = 0;
             AngleCorrectionFr = AngleCorrectionFr - 360 ;
         }
         PrevDirectionfr = Directionfr;
-//------------------------------------------------------
+// corection for module 3 ------------------------------
         if(PrevDirectionbl > idk2 && Directionbl < 0){
             AngleCorrectionBl = AngleCorrectionBl + 360 ;
         }
@@ -154,7 +148,7 @@ int idk2 = 0;
             AngleCorrectionBl = AngleCorrectionBl - 360 ;
         }
         PrevDirectionbl = Directionbl;
-//-----------------------------------------------------
+// corection for module 4 ------------------------------
         if(PrevDirectionbr > idk2 && Directionbr < 0){
             AngleCorrectionBr = AngleCorrectionBr + 360 ;
         }
@@ -162,5 +156,4 @@ int idk2 = 0;
             AngleCorrectionBr = AngleCorrectionBr - 360 ;
         }
         PrevDirectionbr = Directionbr;
-
 }
