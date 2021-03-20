@@ -12,6 +12,7 @@
 
 #include "SwerveModule.h"
 #include <ctre/phoenix.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 class Drivetrain{
  public:
