@@ -44,13 +44,9 @@ void SwerveModule::SwerveHome(){
 
 // set the desired state of the motor, speed/ pos.
 void SwerveModule::SetDesiredState(double SpeedMod, double DirectionMod){
-    TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
-    DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
+    // TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
+    // DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
 }
 
 
-// void ServeModule::AutonomousDrive (int DistanceToDrive, int AngleOfWheels)
-// {
-//     TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
-//     DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
-//     }
+

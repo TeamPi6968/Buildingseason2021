@@ -5,18 +5,12 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
-#include <frc/Timer.h>
 #include <frc/Joystick.h>
 
-#include "Motors.h"
+#include <frc/DigitalInput.h>
 #include "Loader.h"
-#include "Sensors.h"
-#include <frc/Timer.h>
-#include <frc/Joystick.h>
-#include <frc/DoubleSolenoid.h>
 #include "Drivetrain.h"
 #include "Intake.h"
-#include <frc/DigitalInput.h>
 
 
 class Robot : public frc::TimedRobot {
@@ -26,13 +20,21 @@ class Robot : public frc::TimedRobot {
   Intake ModIntake;
   Loader ModTurret;
   Loader test;
-  DigitalInput IRSensor {2};// pin 2 for IR sensor
+  
 
-
-
+int ButtonA = 1;
+int ButtonB = 2;
+int ButtonX = 3;
+int ButtonY = 4;
+int ButtonLB = 5;
+int ButtonRB = 6;
+int ButtonBACK = 7;
+int ButtonSTART = 8;
 
 
  public:
+ DigitalInput IRSensor {2};// pin 2 for IR sensor
+
   void RobotInit() override;
   void RobotPeriodic() override;
 

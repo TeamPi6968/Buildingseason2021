@@ -25,13 +25,14 @@ Comp.SetClosedLoopControl(true);
 
 }
 */
-void Intake::IntakeSolonoids (bool buttonPressed ){
+
+void Intake::IntakeSolonoids (bool buttonPressed, int cellAmount){
   if (buttonPressed){
-        if  (StatusIntake == 0) {
+        if  (StatusIntake == 0 && cellAmount <4) {
         //change status to go out
         StatusIntake = 1;
         //cylinder is out
-        SolonoidLeft.Set(frc::DoubleSolenoid::Value::kForward);
+        SolonoidLeft.Set(frc::DoubleSolenoid::Value::kReverse);
         //spin spark motorscontrollers for intake 
         SparkMaxIntake.Set(IntakeMotorSpeed);
         
@@ -43,7 +44,7 @@ void Intake::IntakeSolonoids (bool buttonPressed ){
         //change status to go in
         StatusIntake = 0;
         //cylinder is in
-        SolonoidLeft.Set(frc::DoubleSolenoid::Value::kReverse);
+        SolonoidLeft.Set(frc::DoubleSolenoid::Value::kForward);
         //stop motor
         SparkMaxIntake.Set(0);
         cout<< "going out" << endl;

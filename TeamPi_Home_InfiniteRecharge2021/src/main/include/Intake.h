@@ -9,7 +9,7 @@ class Intake {
 private:
 //variables
 bool StatusIntake = 0;
-double IntakeMotorSpeed = 0.6;
+double IntakeMotorSpeed = 0.8;
 
 //setup compressor
 frc::Compressor Comp{0};
@@ -28,7 +28,7 @@ rev::CANSparkMax SparkMaxIntake{SparkMaxIntakeID, rev::CANSparkMax::MotorType::k
 public:
 
 void IntakeMotor();
-void IntakeSolonoids (bool buttonPressed);
+void IntakeSolonoids (bool buttonPressed, int cellAmount);
 
 };
 
