@@ -13,8 +13,8 @@ const double kP_Drive = 1;
 const double kI_Drive = 0;
 const double kD_Drive = 0.1;
 
-const double kP_Turning = 1;
-const double kI_Turning = 0;
+const double kP_Turning = 4;
+const double kI_Turning = 0.0015;
 const double kD_Turning = 0.1;
 
 // Declare Motor ID's
@@ -39,7 +39,7 @@ const double Wheel_radius = 0.0508; // meter
 
 // Max speed
 const double MaxSpeed = 12;
-const double MaxRad = 5;
+const double MaxRad = 12;
 
 // Math
 const double pi = 2 * acos(0.0);

@@ -20,5 +20,6 @@
     "ostream": "cpp",
     "cmath": "cpp",
     "istream": "cpp"
-  }
+  },
+  "wpilib.selectDefaultSimulateExtension": true
 }

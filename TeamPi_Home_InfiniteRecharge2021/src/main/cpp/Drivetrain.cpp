@@ -12,91 +12,37 @@
 
 // Drivetrain::Drivetrain(){
 // // create the swervedrive modules.
-   SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
+//    SwerveModule module_frontLeft{LFMotorDrive, LFMotor};
 //   SwerveModule module_frontRight{RFMotorDrive, RFMotor};
 //   SwerveModule module_backLeft{LBMotorDrive, LBMotor};
 //   SwerveModule module_backRight{RBMotorDrive, RBMotor};
 // }
 
 void Drivetrain::MathSwerve(double xValue, double yValue, double rot){
-    if (yValue < 0){
-        // calc the rot speed
-        double rotVel = rot * MaxRad;
+    // calc the rot speed
+    double rotVel = rot * MaxRad;
 
-        // vector calc per module  (x, y)
-        double VectorFL[2] = {rotVel * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * -sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[2] * -sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorBR[2] = {-rotVel * DistanceMod[3] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[3] * sin(RotVecInRad) + yValue * MaxSpeed};
+    // vector calc per module  (x, y)
+    double VectorFL[2] = {rotVel * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
+    double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * sin(RotVecInRad) + yValue * MaxSpeed};
+    double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[2] * sin(RotVecInRad) + yValue * MaxSpeed};
+    double VectorBR[2] = {-rotVel * DistanceMod[3] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[3] * sin(RotVecInRad) + yValue * MaxSpeed};
 
-        // calc the speed and oriantation of the mod  (speed, direction)
-        double SwerveModValRot [4][2] = {{sqrt(pow(VectorFL[0], 2)+ pow(VectorFL[1], 2)), atan(VectorFL[0]/VectorFL[1])},
-                                            {sqrt(pow(VectorFR[0], 2)+ pow(VectorFR[1], 2)), atan(VectorFR[0]/VectorFR[1])},
-                                            {sqrt(pow(VectorBL[0], 2)+ pow(VectorBL[1], 2)), atan(VectorBL[0]/VectorBL[1])},
-                                            {sqrt(pow(VectorBR[0], 2)+ pow(VectorBR[1], 2)), atan(VectorBR[0]/VectorBR[1])}};
+    // calc the speed and oriantation of the mod  (speed, direction)
+    double SwerveModValRot [4][2] = {{sqrt(pow(VectorFL[0], 2)+ pow(VectorFL[1], 2)), atan2(VectorFL[1], VectorFL[0])},
+                                        {sqrt(pow(VectorFR[0], 2)+ pow(VectorFR[1], 2)), atan2(VectorFR[1], VectorFR[0])},
+                                        {sqrt(pow(VectorBL[0], 2)+ pow(VectorBL[1], 2)), atan2(VectorBL[1], VectorBL[0])},
+                                        {sqrt(pow(VectorBR[0], 2)+ pow(VectorBR[1], 2)), atan2(VectorBR[1], VectorBR[0])}};
 
-            Speedfl = SwerveModValRot[0][0]*(180/pi);
-            Directionfl = SwerveModValRot[0][1]*(180/pi)+180;
-            Speedfr = SwerveModValRot[1][0]*(180/pi);
-            Directionfr = SwerveModValRot[1][1]*(180/pi)+180;
-            Speedbl = SwerveModValRot[2][0]*(180/pi);
-            Directionbl = SwerveModValRot[2][1]*(180/pi)+180;
-            Speedbr = SwerveModValRot[3][0]*(180/pi);
-            Directionbr = SwerveModValRot[3][1]*(180/pi)+180;
+    Speedfl = SwerveModValRot[0][0]*(180/pi);
+    Directionfl = SwerveModValRot[0][1]*(180/pi) -90;
+    Speedfr = SwerveModValRot[1][0]*(180/pi);
+    Directionfr = SwerveModValRot[1][1]*(180/pi) -90;
+    Speedbl = SwerveModValRot[2][0]*(180/pi);
+    Directionbl = SwerveModValRot[2][1]*(180/pi) -90;
+    Speedbr = SwerveModValRot[3][0]*(180/pi);
+    Directionbr = SwerveModValRot[3][1]*(180/pi) -90;
 
-
-    }
-    else if (rot < 0){
-        // calc the rot speed
-        double rotVel = rot * MaxRad;
-
-        // vector calc per module  (x, y)
-        double VectorFL[2] = {rotVel * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * -sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[2] * -sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorBR[2] = {-rotVel * DistanceMod[3] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[3] * sin(RotVecInRad) + yValue * MaxSpeed};
-
-        // calc the speed and oriantation of the mod  (speed, direction)
-        double SwerveModValRot [4][2] = {{sqrt(pow(VectorFL[0], 2)+ pow(VectorFL[1], 2)), atan(VectorFL[0]/VectorFL[1])},
-                                            {sqrt(pow(VectorFR[0], 2)+ pow(VectorFR[1], 2)), atan(VectorFR[0]/VectorFR[1])},
-                                            {sqrt(pow(VectorBL[0], 2)+ pow(VectorBL[1], 2)), atan(VectorBL[0]/VectorBL[1])},
-                                            {sqrt(pow(VectorBR[0], 2)+ pow(VectorBR[1], 2)), atan(VectorBR[0]/VectorBR[1])}};
-
-            Speedfl = SwerveModValRot[0][0]*(180/pi);
-            Directionfl = SwerveModValRot[0][1]*(180/pi)+180;
-            Speedfr = SwerveModValRot[1][0]*(180/pi);
-            Directionfr = SwerveModValRot[1][1]*(180/pi)+180;
-            Speedbl = SwerveModValRot[2][0]*(180/pi);
-            Directionbl = SwerveModValRot[2][1]*(180/pi)+180;
-            Speedbr = SwerveModValRot[3][0]*(180/pi);
-            Directionbr = SwerveModValRot[3][1]*(180/pi)+180;
-    }
-
-    else{
-        // calc the rot speed
-        double rotVel = rot * MaxRad;
-
-        // vector calc per module  (x, y)
-        double VectorFL[2] = {rotVel * DistanceMod[0] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[0] * sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorFR[2] = {rotVel * DistanceMod[1] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[1] * -sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorBL[2] = {-rotVel * DistanceMod[2] * cos(RotVecInRad) + xValue * MaxSpeed, -rotVel * DistanceMod[2] * -sin(RotVecInRad) + yValue * MaxSpeed};
-        double VectorBR[2] = {-rotVel * DistanceMod[3] * cos(RotVecInRad) + xValue * MaxSpeed, rotVel * DistanceMod[3] * sin(RotVecInRad) + yValue * MaxSpeed};
-
-        // calc the speed and oriantation of the mod  (speed, direction)
-        double SwerveModValRot [4][2] = {{sqrt(pow(VectorFL[0], 2)+ pow(VectorFL[1], 2)), atan(VectorFL[0]/VectorFL[1])},
-                                            {sqrt(pow(VectorFR[0], 2)+ pow(VectorFR[1], 2)), atan(VectorFR[0]/VectorFR[1])},
-                                            {sqrt(pow(VectorBL[0], 2)+ pow(VectorBL[1], 2)), atan(VectorBL[0]/VectorBL[1])},
-                                            {sqrt(pow(VectorBR[0], 2)+ pow(VectorBR[1], 2)), atan(VectorBR[0]/VectorBR[1])}};
-
-            Speedfl = SwerveModValRot[0][0]*(180/pi);
-            Directionfl = SwerveModValRot[0][1]*(180/pi);
-            Speedfr = SwerveModValRot[1][0]*(180/pi);
-            Directionfr = SwerveModValRot[1][1]*(180/pi);
-            Speedbl = SwerveModValRot[2][0]*(180/pi);
-            Directionbl = SwerveModValRot[2][1]*(180/pi);
-            Speedbr = SwerveModValRot[3][0]*(180/pi);
-            Directionbr = SwerveModValRot[3][1]*(180/pi);
-    }
 }
 
 // zero all the modules.
@@ -159,7 +105,18 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
     MathSwerve(xValue, yValue, rotation);
     AngleCorrection();
 
-    //cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n";
+    static double setpoint = 0;
+
+    //visualisation rotation speed
+    frc::SmartDashboard::PutNumber("Direction_FL", Directionfl + AngleCorrectionFl);
+    frc::SmartDashboard::PutNumber("Direction_FR", Directionfr + AngleCorrectionFr);
+    frc::SmartDashboard::PutNumber("Direction_BL", Directionbl + AngleCorrectionBl);
+    frc::SmartDashboard::PutNumber("Direction_BR", Directionbr + AngleCorrectionBr);
+
+    // setpoint= frc::SmartDashboard::GetNumber("Setpoint", setpoint);
+
+
+    cout << Speedfl << ' '  << Directionfl << ' '  << Speedfr << ' '  << Directionfr  << ' '  << Speedbl << ' '  << Directionbl << ' '  << Speedbr << ' '  << Directionbr << "\n";
     module_frontLeft.SetDesiredState(Speedfl * Move, Directionfl + AngleCorrectionFl);
     // cout << "thing: " << Directionfl + AngleCorrectionFl << "\n";
     module_frontRight.SetDesiredState(Speedfr * Move, Directionfr + AngleCorrectionFr);
@@ -170,36 +127,38 @@ void Drivetrain::Drive(double xValue, double yValue, double rotation){
 
 void Drivetrain::AngleCorrection(){
 // clean this code up
-    //cout << PrevDirectionfl << "\n";
+int idk1 = -180;
+int idk2 = 0;
+    cout << PrevDirectionfl << "\n";
 
-        if(PrevDirectionfl > 180 && Directionfl < 0){
+        if(PrevDirectionfl > idk2 && Directionfl < 0){
             AngleCorrectionFl = AngleCorrectionFl + 360 ;
         }
-        else if (PrevDirectionfl < 0 && Directionfl > 180){
+        else if (PrevDirectionfl < idk1 && Directionfl > 0){
             AngleCorrectionFl = AngleCorrectionFl - 360 ;
         }
         PrevDirectionfl = Directionfl;
 //-------------------------------------------------------
-        if(PrevDirectionfr > 240 && Directionfr < -70){
+        if(PrevDirectionfr > idk2 && Directionfr < 0){
             AngleCorrectionFr = AngleCorrectionFr + 360 ;
         }
-        else if (PrevDirectionfr < -60 && Directionfr > 250){
+        else if (PrevDirectionfr < idk1 && Directionfr > 0){
             AngleCorrectionFr = AngleCorrectionFr - 360 ;
         }
         PrevDirectionfr = Directionfr;
 //------------------------------------------------------
-        if(PrevDirectionbl > 240 && Directionbl < -70){
+        if(PrevDirectionbl > idk2 && Directionbl < 0){
             AngleCorrectionBl = AngleCorrectionBl + 360 ;
         }
-        else if (PrevDirectionbl < -60 && Directionbl > 250){
+        else if (PrevDirectionbl < idk1 && Directionbl > 0){
             AngleCorrectionBl = AngleCorrectionBl - 360 ;
         }
         PrevDirectionbl = Directionbl;
 //-----------------------------------------------------
-        if(PrevDirectionbr > 240 && Directionbr < -70){
+        if(PrevDirectionbr > idk2 && Directionbr < 0){
             AngleCorrectionBr = AngleCorrectionBr + 360 ;
         }
-        else if (PrevDirectionbr < -60 && Directionbr > 250){
+        else if (PrevDirectionbr < idk1 && Directionbr > 0){
             AngleCorrectionBr = AngleCorrectionBr - 360 ;
         }
         PrevDirectionbr = Directionbr;

@@ -32,6 +32,18 @@ void SwerveModule::SetPID(){
     TurningMotor.Config_kD(0, kD_Turning, TimeOut);
 }
 
+void SwerveModule::SetPID(double kp,double ki,double kd){
+    // set PID values for the drive motor.
+    DriveMotor.Config_kP(0, kP_Drive, TimeOut);
+    DriveMotor.Config_kI(0, kI_Drive, TimeOut);
+    DriveMotor.Config_kD(0, kD_Drive, TimeOut);
+
+    // set PID values for the turning motor.
+    TurningMotor.Config_kP(0, kP_Turning, TimeOut);
+    TurningMotor.Config_kI(0, kI_Turning, TimeOut);
+    TurningMotor.Config_kD(0, kD_Turning, TimeOut);
+}
+
 // zero the encoders of the swerve module.
 void SwerveModule::SwerveZero(){
     TurningMotor.SetSelectedSensorPosition(0, 0, TimeOut);
@@ -44,9 +56,6 @@ void SwerveModule::SwerveHome(){
 
 // set the desired state of the motor, speed/ pos.
 void SwerveModule::SetDesiredState(double SpeedMod, double DirectionMod){
-    // TurningMotor.Set(ControlMode::Position, 2 * DirectionMod);
-    // DriveMotor.Set(ControlMode::Velocity, 4 * SpeedMod);
+    TurningMotor.Set(ControlMode::Position, 1 * DirectionMod);
+    DriveMotor.Set(ControlMode::Velocity, 1 * SpeedMod);
 }
-
-
-

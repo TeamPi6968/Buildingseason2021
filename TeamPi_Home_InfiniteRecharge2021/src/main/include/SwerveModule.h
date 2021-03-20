@@ -10,7 +10,7 @@
 
 #include <ctre/phoenix.h>
 #include "SwerveConst.h"
-#include <cmath>
+#include "math.h"
 #include <iostream>
 
 using namespace std;
@@ -20,6 +20,7 @@ class SwerveModule{
     // init all the swerve motors of the modules
     SwerveModule(int DriveMotorID, int TurningMotorID);
     void SetPID();
+    void SetPID(double kp,double ki,double kd);
     // Zero the wheel position of the swerve.
     void SwerveZero();
     // Set the swerve wheel direction back to 0.
