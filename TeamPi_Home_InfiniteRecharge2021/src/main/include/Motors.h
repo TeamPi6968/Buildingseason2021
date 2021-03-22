@@ -30,7 +30,7 @@ private:
   CANSparkMax *rtpiSparkMax;
   CANEncoder *rtpiSparkMaxEncoder;
   CANPIDController *rtpiSparkMaxPIDController;
-  void RTPI_SparkMax(bool isBrushless, int canID, double acceleration, bool isInverted, bool encoder, bool pidController);
+  void RTPI_SparkMax(bool brushless, int canID, double acceleration, bool inverted, bool encoder, bool pidController);
 
 
   //TalonFX Fields
@@ -47,7 +47,7 @@ public:
   };
 
   Motors(motorCtrlTypes selectType, int canID);
-  Motors(motorCtrlTypes selectType, int canID, bool isBrushless, double acceleration, bool isInverted, bool encoder, bool pidController);
+  Motors(motorCtrlTypes selectType, int canID, bool brushless, double acceleration, bool inverted, bool encoder, bool pidController);
   ~Motors();
   
 

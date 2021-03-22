@@ -3,70 +3,48 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "Robot.h"
-#include <frc/Joystick.h>
 
+void Robot::RobotInit() {}
+void Robot::RobotPeriodic() {}
 
-void Robot::RobotInit() {
+void Robot::AutonomousInit() {}
+void Robot::AutonomousPeriodic() {
 
 }
-void Robot::RobotPeriodic() {
 
-}
+void Robot::TeleopInit() {
+  // frc::DoubleSolenoid anotherDoubleSolenoid{0, 1, 2};
 
-void Robot::AutonomousInit() {
-  time = new Timer();
-  StorageMotor1 = new Motors(Motors::motorCtrlTypes::SPARKMAX, StoragecanID1,brushed,accelerate,inverted,noEncoder,noPID);
-  LoaderMotor1  = new Motors(Motors::motorCtrlTypes::SPARKMAX, LoadercanID1,brushed,accelerate,inverted,noEncoder,noPID);
+  // anotherDoubleSolenoid.Set(frc::DoubleSolenoid::Value::kForward);
 
-  turret = new Turret();
-
-
-  time->Start();
-  lastTime = time->Get();
-  intake = new Intake_System(LoaderMotor1,StorageMotor1);
-  this->Swerve = new RTPI_Swerve(DriveCoeficient,RotationCoeficient);
-  this->Swerve->SetRotatePIDValues(SwervekP,SwervekI,SwervekD);
-  drivePath = DrivePath::first;
+  Swerve.SetAllPID();
+  Swerve.ZeroDrivetrain();
   
 }
-void Robot::AutonomousPeriodic() {
-  switch (drivePath){
-  case DrivePath::first:
-    this->Swerve->SetAllDriveDistance(firstStep);
-    drivePath = DrivePath::second;
-    break;
-  case DrivePath::second:
-    this->Swerve->SetAllDirection(turn90);
-    this->Swerve->SetAllDriveDistance(firstStep/2);
-    drivePath = DrivePath::third;
-    break;
-  case DrivePath::third:
-      if (time->Get() - lastTime < intakeDelay){ //Time to keep the motors running
-      intake->loader->runLoader();
-      intake->storage->runStorage();
-      }
-      
-      turret->Shoot(true, turretSpeed);
-    drivePath = DrivePath::done;
-    break;
-  default:
-    break;
-  }
-}
 
-
-
-void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {
+  Swerve.Drive(m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
 
 
-}
+//milans functions
+ ModIntake.IntakeSolonoids(m_stick.GetRawButtonPressed(ButtonRB),ModTurret.AmountCellsInStorage); //6 = right top trigger
+  //ModTurret.LoaderStoreLoad(m_stick.GetRawButtonPressed(ButtonLB));
+  ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),ModTurret.SimulatingIRSensor);
+  ModTurret.refillTurret(ModTurret.SimulatingIRSensor);
+    
+  
+  //ModTurret.test(m_stick.GetRawButton(ButtonX));
+  ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
+  }
+
+
 
 void Robot::DisabledInit() {}
 void Robot::DisabledPeriodic() {}
 
 void Robot::TestInit() {}
 void Robot::TestPeriodic() {}
+
 
 #ifndef RUNNING_FRC_TESTS
 int main() {

@@ -5,41 +5,40 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
-#include "RTPI_Swerve.h"
-#include "RobotConstants.h"
-#include <frc/Timer.h>
-#include "Intake_System.h"
-#include <ctre/Phoenix.h>
-#include "Turret.h"
+#include <frc/Joystick.h>
+
+#include <frc/DigitalInput.h>
+#include "Intake_Storage_Loader/Loader.h"
+#include "SwerveDrive/Drivetrain.h"
+#include "Intake_Storage_Loader/Intake.h"
+
+#include <Pixy2/Pixy2CCC.h>
+//#include <PixyProgram.h>
+
 
 
 class Robot : public frc::TimedRobot {
-  private:
-  RTPI_Swerve * Swerve;
-  frc::Timer* time;
-  double lastTime;
-  double intakeDelay = 3;
-  Intake_System* intake;
+ private:
+  Drivetrain Swerve;
+  frc::Joystick m_stick{0};
+  Intake ModIntake;
+  Loader ModTurret;
+  Loader test;
+  
 
-  enum DrivePath
-  {
-    first = 0,
-    second = 1,
-    third = 2,
-    done = 3
-  } drivePath;
-
-  //Motors
-  //Storage
-  Motors* StorageMotor1;
-  //Loader
-  Motors* LoaderMotor1;
-
-  //Turret
-  Turret * turret;
+int ButtonA = 1;
+int ButtonB = 2;
+int ButtonX = 3;
+int ButtonY = 4;
+int ButtonLB = 5;
+int ButtonRB = 6;
+int ButtonBACK = 7;
+int ButtonSTART = 8;
 
 
  public:
+ DigitalInput IRSensor {2};// pin 2 for IR sensor
+
   void RobotInit() override;
   void RobotPeriodic() override;
 
@@ -54,4 +53,6 @@ class Robot : public frc::TimedRobot {
 
   void TestInit() override;
   void TestPeriodic() override;
+
+
 };
