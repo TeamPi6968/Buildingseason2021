@@ -27,6 +27,8 @@ class SwerveModule{
     void SwerveHome();
     // Set swerve to desired pos/ speed.
     void SetDesiredState(double speed, double Direction);
+    // Set the module to a determent position on the field 
+    void SetDesiredPosition(double Distance, double Angle);
 
 
 

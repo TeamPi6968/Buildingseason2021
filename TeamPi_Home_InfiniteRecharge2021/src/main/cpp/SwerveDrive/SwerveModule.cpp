@@ -59,3 +59,9 @@ void SwerveModule::SetDesiredState(double SpeedMod, double DirectionMod){
     TurningMotor.Set(ControlMode::Position, 1 * DirectionMod);
     DriveMotor.Set(ControlMode::Velocity, 1 * SpeedMod);
 }
+
+// Set the module to a determent position on the field 
+void SwerveModule::SetDesiredPosition(double Distance, double Angle){
+    TurningMotor.Set(ControlMode::Position, Angle);
+    DriveMotor.Set(ControlMode::Position, Distance);
+}
