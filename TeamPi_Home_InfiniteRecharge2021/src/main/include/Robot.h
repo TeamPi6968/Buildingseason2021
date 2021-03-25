@@ -8,9 +8,13 @@
 #include <frc/Joystick.h>
 
 #include <frc/DigitalInput.h>
-#include "Loader.h"
-#include "Drivetrain.h"
-#include "Intake.h"
+#include "Intake_Storage_Loader/Loader.h"
+#include "SwerveDrive/Drivetrain.h"
+#include "Intake_Storage_Loader/Intake.h"
+
+#include <Pixy2/Pixy2CCC.h>
+//#include <PixyProgram.h>
+
 
 
 class Robot : public frc::TimedRobot {
@@ -49,4 +53,6 @@ int ButtonSTART = 8;
 
   void TestInit() override;
   void TestPeriodic() override;
+
+
 };

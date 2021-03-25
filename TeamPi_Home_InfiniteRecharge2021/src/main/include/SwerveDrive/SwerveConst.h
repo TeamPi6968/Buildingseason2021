@@ -34,12 +34,13 @@ const int TimeOut = 60;
 
 // Declare gear ratio
 const double Turning_ratio = 0.047619047619047619;
-const double Drive_ratio = 0.040178571428;
-const double Wheel_radius = 0.0508; // meter
+// const double Drive_ratio = 0.040178571428;
+const double Drive_ratio = 0.0915032679738562;
+const double Wheel_radius = 0.0516; // meter
 
 // Max speed
-const double MaxSpeed = 12;
-const double MaxRad = 12;
+const double MaxSpeed = 20;
+const double MaxRad = 20;
 
 // Math
 const double pi = 2 * acos(0.0);

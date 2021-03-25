@@ -4,35 +4,36 @@
 
 #include "Robot.h"
 
-void Robot::RobotInit() {}
+void Robot::RobotInit() {
+  Swerve.SetAllPID();
+  Swerve.ZeroDrivetrain();
+}
 void Robot::RobotPeriodic() {}
 
 void Robot::AutonomousInit() {}
 void Robot::AutonomousPeriodic() {
-
+  // test for autonomous driving.
+  Swerve.SetDesiredPositionRobot(0,0);
 }
 
 void Robot::TeleopInit() {
-  // frc::DoubleSolenoid anotherDoubleSolenoid{0, 1, 2};
 
-  // anotherDoubleSolenoid.Set(frc::DoubleSolenoid::Value::kForward);
+  Swerve.SetAllPID();
+  Swerve.ZeroDrivetrain();
 
-  // Swerve.SetAllPID();
-  // Swerve.ZeroDrivetrain();
-  
 }
 
 void Robot::TeleopPeriodic() {
-  // Swerve.Drive(m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
+  Swerve.Drive(m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
 
 
-//milans functions
- ModIntake.IntakeSolonoids(m_stick.GetRawButtonPressed(ButtonRB),ModTurret.AmountCellsInStorage); //6 = right top trigger
-  //ModTurret.LoaderStoreLoad(m_stick.GetRawButtonPressed(ButtonLB));
-  ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),IRSensor.Get());
-  // ModTurret.refillTurret(ModTurret.SimulatingIRSensor);
-    IRSensor; 
+  //milans functions
+  ModIntake.IntakeSolonoids(m_stick.GetRawButtonPressed(ButtonRB),ModTurret.AmountCellsInStorage); //6 = right top trigger
   
+  ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),IRSensor.Get());
+
+
+
   //ModTurret.test(m_stick.GetRawButton(ButtonX));
   ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
   }
@@ -44,6 +45,7 @@ void Robot::DisabledPeriodic() {}
 
 void Robot::TestInit() {}
 void Robot::TestPeriodic() {}
+
 
 #ifndef RUNNING_FRC_TESTS
 int main() {
