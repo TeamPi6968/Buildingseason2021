@@ -38,23 +38,27 @@ bool shotingStatus = 0; // status of shooting
 int simStatusCase1 = 0;
 int simStatusCase2 = 0;
 int simStatusCase3 = 0;
-int lastIrStatus = 0;
-  int currentIrStatus = 0;
+bool lastIrStatus = 0;
+  bool currentIrStatus = 0;
+  bool intakeStatus = 1;
+  bool shoting = 0;
 
 //ID of motors
 static const int SparkMaxStorageID = 18;
 static const int SparkMaxLoaderID = 19;
 
 // speeds of motors
-float StorageMotorSpeed = -0.3;
-float LoaderMotorSpeed = -0.7;
-float turretMotorSpeed = 0.7;
-float turretShotingSpeed = 1;
+float StorageMotorMaxSpeed = -0.4;// max speed of shoting motors
+float LoaderMotorMaxSpeed = -0.7;// max speed of shoting motors
+float turretMotorMaxSpeed = 0.7;// max speed of shoting motors
+float turretShotingMaxSpeed = 0.8;// max speed of shoting motors
+float turretShotingMinSpeed = 0.0; //minimal speed of shoting motors
+
+
 
 // create motor variable
 rev::CANSparkMax SparkMaxStorage{SparkMaxStorageID, rev::CANSparkMax::MotorType::kBrushed}; // storage motor
 rev::CANSparkMax SparkMaxLoader{SparkMaxLoaderID, rev::CANSparkMax::MotorType::kBrushed}; //loader motor
-
   
 
 public:
@@ -71,9 +75,11 @@ public:
 int AmountCellsInStorage = 0;// amount cells in storage
 bool SimulatingIRSensor = 0;
 void LoaderStoreLoad (bool buttonPressed);
-void Shoot (int ShootButPressed, bool SimIR);
+void Shoot (bool buttonPressed, bool IRSensor);
 void refillTurret(int IRSensor);
 void test (bool sensor);
+void cellCounting(bool IRSensor, int PixyValue);
+//void Shoot(int buttonPressed);
 
 // testing functions
 void simulating(bool button1, bool button2, bool button3);
