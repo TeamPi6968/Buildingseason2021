@@ -17,6 +17,9 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
 
+  Swerve.SetAllPID();
+  Swerve.ZeroDrivetrain();
+
 }
 
 void Robot::TeleopPeriodic() {
@@ -25,11 +28,11 @@ void Robot::TeleopPeriodic() {
 
   //milans functions
   ModIntake.IntakeSolonoids(m_stick.GetRawButtonPressed(ButtonRB),ModTurret.AmountCellsInStorage); //6 = right top trigger
-  //ModTurret.LoaderStoreLoad(m_stick.GetRawButtonPressed(ButtonLB));
-  ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),ModTurret.SimulatingIRSensor);
-  ModTurret.refillTurret(ModTurret.SimulatingIRSensor);
-    
   
+  ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),IRSensor.Get());
+
+
+
   //ModTurret.test(m_stick.GetRawButton(ButtonX));
   ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
   }

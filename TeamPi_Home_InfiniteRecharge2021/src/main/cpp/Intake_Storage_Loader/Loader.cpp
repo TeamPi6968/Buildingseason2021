@@ -52,8 +52,8 @@ void Loader::LoaderStoreLoad(bool buttonPressed)
       //change status to go out
       StatusLoader = 1;
       //spin spark motorscontrollers for Loader and storage
-      SparkMaxStorage.Set(StorageMotorSpeed);
-      SparkMaxLoader.Set(LoaderMotorSpeed);
+      SparkMaxStorage.Set(StorageMotorMaxSpeed);
+      SparkMaxLoader.Set(LoaderMotorMaxSpeed);
       cout << "Spinnn!!!" << endl;
     }
 
@@ -104,7 +104,7 @@ void Loader::Shoot(int ShootButPressed, bool IRSensor) // change SIMir when for 
   }
 }
 */
-
+/*
 void Loader::Shoot(int ShootButPressed, bool IRSensor)
 {
   lastIrStatus = currentIrStatus;
@@ -112,13 +112,13 @@ void Loader::Shoot(int ShootButPressed, bool IRSensor)
   if (lastIrStatus == 1 && currentIrStatus == 0)
   {
     AmountCellsInStorage--;
-   
+
     if (AmountCellsInStorage <= 0)
     {
       AmountCellsInStorage = 0;
       shotingStatus = 0;
     }
-     cout << "amount cells is " << AmountCellsInStorage << endl;
+    cout << "amount cells is " << AmountCellsInStorage << endl;
   }
 
   if (ShootButPressed && AmountCellsInStorage > 0 && IRSensor)
@@ -146,22 +146,76 @@ void Loader::Shoot(int ShootButPressed, bool IRSensor)
         //cout << shotingTimer->Get();
         StatusRefill = 0;
       }
-      // stop motor falcon CAN ID:
-      shootingMotorMaster->Set(0);
-      shootingMotorSlave->Set(0);
-      cout << " shoting stopped" << endl;
-      //cout << shotingTimer->Get();
+      else
+      {
+        // stop motor falcon CAN ID:
+        shootingMotorMaster->Set(0);
+        shootingMotorSlave->Set(0);
+        cout << " shoting stopped" << endl;
+        //cout << shotingTimer->Get();
 
-      SparkMaxLoader.Set(0); //stops motor
-      shotingStatus == 0;    //change shoting status
-      shotingTimer->Stop();
-      shotingTimer->Reset(); //resets timer
-      StatusRefill = 1;      //refill is possible
+        SparkMaxLoader.Set(0); //stops motor
+        shotingStatus == 0;    //change shoting status
+        shotingTimer->Stop();
+        shotingTimer->Reset(); //resets timer
+        StatusRefill = 1;      //refill is possible
 
-      SparkMaxStorage.Set(0); // stops motor
+        SparkMaxStorage.Set(0); // stops motor
+      }
     }
   }
 }
+*/
+
+void Loader::Shoot(bool buttonPressed, bool IRSensor)
+{
+  //subtracting cells
+  lastIrStatus = currentIrStatus;
+  currentIrStatus = !IRSensor;
+  if (lastIrStatus == 1 && currentIrStatus == 0)
+  {
+    AmountCellsInStorage--;
+    cout << AmountCellsInStorage << endl;
+  }
+  if (AmountCellsInStorage <= 0)
+  {
+    AmountCellsInStorage = 0;
+    shotingStatus = 0;
+    shoting = 0;
+  }
+  else if (AmountCellsInStorage > 0)
+  {
+    shotingStatus = 1;
+  }
+
+  if (AmountCellsInStorage != 0 && buttonPressed)
+  {
+    shoting = 1;
+  }
+  if (shoting == 1)
+  {
+    cout << " shoting" << endl;
+    // spin motor falcon shoting motor ID:
+    shootingMotorMaster->Set(turretShotingMaxSpeed);
+    shootingMotorSlave->Set(turretShotingMaxSpeed);
+    //spark motors
+    SparkMaxStorage.Set(StorageMotorMaxSpeed);
+    // spin loaderMotor spark max ID: 18
+    SparkMaxLoader.Set(LoaderMotorMaxSpeed);
+  }
+  else if (shoting == 0)
+  {
+    //  cout << " shoting stopped" << endl;
+    // spin motor falcon shoting motor ID:
+    shootingMotorMaster->Set(turretShotingMinSpeed);
+    shootingMotorSlave->Set(turretShotingMinSpeed);
+    //spark motors
+    SparkMaxStorage.Set(0);
+    // spin loaderMotor spark max ID: 18
+    SparkMaxLoader.Set(0);
+  }
+}
+
 /*
 // function will spin storage motor when there are cells in the storage and no cell is above the IR sensor. i
 // it will stop when a cell is above IR sensor.
@@ -203,53 +257,44 @@ void Loader::refillTurret(int IRSensor)
   }
 }
 */
-
-void Loader::refillTurret(int IRsensor)
-{
-
-  if (IRsensor && AmountCellsInStorage > 0)
+/*
+  void Loader::refillTurret(int IRsensor)
   {
-    //spin storageMotor ID: 19;
-    SparkMaxStorage.Set(StorageMotorSpeed);
 
-    // cout << "refill storage" << endl;
-    // cout << "amount cells is "<< AmountCellsInStorage << endl;
+    if (IRsensor && AmountCellsInStorage > 0)
+    {
+      //spin storageMotor ID: 19;
+      SparkMaxStorage.Set(StorageMotorSpeed);
+
+      // cout << "refill storage" << endl;
+      // cout << "amount cells is "<< AmountCellsInStorage << endl;
+    }
+    else
+    {
+      // cout << "refill stoped" << endl;
+      SparkMaxStorage.Set(0);
+    }
+
+    if (AmountCellsInStorage > 0)
+    {
+      shotingStatus == 1;
+      // cout << "more than 0" << endl;
+    }
   }
-  else
+
+  // just a function to test things.
+  void Loader::test(bool sensor)
   {
-    // cout << "refill stoped" << endl;
-    SparkMaxStorage.Set(0);
   }
-
-  if (AmountCellsInStorage > 0)
-  {
-    shotingStatus == 1;
-    // cout << "more than 0" << endl;
-  }
-}
-
-// just a function to test things.
-void Loader::test(bool sensor)
-{
-}
-
+*/
 // fucntion to simulate values for testing.
 void Loader::simulating(bool button1, bool button2, bool button3)
 {
   if (button1)
   {
-    if (simStatusCase1 == 1)
-    {
-      AmountCellsInStorage++;
-      simStatusCase1 = 0;
-      cout << " cells is " << AmountCellsInStorage << endl;
-    }
-    else if (simStatusCase1 == 0)
-    {
-      //AmountCellsInStorage = 0;
-      simStatusCase1 = 1;
-      cout << " cells is 0" << endl;
-    }
+    AmountCellsInStorage++;
+
+    cout << " cells is " << AmountCellsInStorage << endl;
   }
 
   if (button2)
@@ -272,20 +317,9 @@ void Loader::simulating(bool button1, bool button2, bool button3)
 
   if (button3)
   {
-    if (simStatusCase3 == 1)
-    {
-      StatusRefill = 1;
-      simStatusCase3 = 0;
-      cout << "refill is 1" << endl;
-      cout << SimulatingIRSensor << endl;
-    }
-    else if (simStatusCase3 == 0)
-    {
-      StatusRefill = 0;
-      simStatusCase3 = 1;
-      cout << "refill is 0" << endl;
-      cout << SimulatingIRSensor << endl;
-    }
+    AmountCellsInStorage--;
+
+    cout << " cells is " << AmountCellsInStorage << endl;
   }
 
   /*

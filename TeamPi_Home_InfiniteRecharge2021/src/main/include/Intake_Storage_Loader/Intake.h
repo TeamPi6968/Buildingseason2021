@@ -9,7 +9,7 @@ class Intake {
 private:
 //variables
 bool StatusIntake = 0;
-double IntakeMotorSpeed = 0.8;
+double IntakeMotorSpeed = 0.6;
 
 //setup compressor
 frc::Compressor Comp{0};
