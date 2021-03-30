@@ -30,6 +30,11 @@ class SwerveModule{
     // Set the module to a determent position on the field 
     void SetDesiredPosition(double Distance, double Angle);
 
+    double GetModulePosition();
+
+    double GetModulePositionDrive();
+    double GetModulePositionAngle();
+
 
 
    //function for hard coded autonomous part to drive.

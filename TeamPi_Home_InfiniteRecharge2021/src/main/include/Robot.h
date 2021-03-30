@@ -11,7 +11,7 @@
 #include "Intake_Storage_Loader/Loader.h"
 #include "SwerveDrive/Drivetrain.h"
 #include "Intake_Storage_Loader/Intake.h"
-
+#include "SwerveDrive/DrivePattern.h"
 #include <Pixy2/Pixy2CCC.h>
 //#include <PixyProgram.h>
 
@@ -24,7 +24,7 @@ class Robot : public frc::TimedRobot {
   Intake ModIntake;
   Loader ModTurret;
   Loader test;
-  
+  DrivePattern DP;
 
 int ButtonA = 1;
 int ButtonB = 2;

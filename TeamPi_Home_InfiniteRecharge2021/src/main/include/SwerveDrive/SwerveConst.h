@@ -9,12 +9,15 @@
 #pragma once
 
 // Declare PID values
-const double kP_Drive = 1;
+const double kP_Drive = 4;
 const double kI_Drive = 0;
 const double kD_Drive = 0.1;
 
 const double kP_Turning = 4;
 const double kI_Turning = 0.0015;
+// test
+// const double kP_Turning = 6;
+// const double kI_Turning = 0.01;
 const double kD_Turning = 0.1;
 
 // Declare Motor ID's
@@ -39,8 +42,8 @@ const double Drive_ratio = 0.0915032679738562;
 const double Wheel_radius = 0.0516; // meter
 
 // Max speed
-const double MaxSpeed = 20;
-const double MaxRad = 20;
+const double MaxSpeed = 5;
+const double MaxRad = 5;
 
 // Math
 const double pi = 2 * acos(0.0);
