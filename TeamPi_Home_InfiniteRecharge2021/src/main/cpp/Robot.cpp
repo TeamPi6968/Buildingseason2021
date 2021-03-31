@@ -11,10 +11,12 @@ void Robot::RobotInit() {
 void Robot::RobotPeriodic() {}
 
 void Robot::AutonomousInit() {
+
+
 }
 void Robot::AutonomousPeriodic() {
-  //DP.Bounce();
-  ball_detect.runPixy2Intake();
+  DP.Bounce();
+
 }
 
 void Robot::TeleopInit() {
@@ -39,7 +41,18 @@ void Robot::TeleopPeriodic() {
   ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
   }
 
+void Robot::Pixy_Setup(){
+  int temp;
+  this->pixy = new Pixy2(Pixy2::LinkType::SPI);
+  temp = this->pixy->init();
 
+  cout<<temp;
+  //this->ccc = new Pixy2CCC(pixy);
+  // this->video = new Pixy2Video(pixy);
+
+//  ball_detect = new Pixy2Program(pixy,ccc,video);
+//  ball_detect->Pixy2_Init();
+}
 
 void Robot::DisabledInit() {}
 void Robot::DisabledPeriodic() {}

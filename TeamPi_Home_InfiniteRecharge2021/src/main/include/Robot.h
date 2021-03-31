@@ -21,7 +21,11 @@
 
 class Robot : public frc::TimedRobot {
  private:
-  Pixy2Program ball_detect;
+  Pixy2Program* ball_detect;
+
+  Pixy2* pixy;
+  Pixy2CCC* ccc;
+  Pixy2Video* video;
   Drivetrain Swerve;
   frc::Joystick m_stick{0};
   Intake ModIntake;
@@ -56,6 +60,8 @@ int ButtonSTART = 8;
 
   void TestInit() override;
   void TestPeriodic() override;
+
+  void Pixy_Setup();
 
 
 };
