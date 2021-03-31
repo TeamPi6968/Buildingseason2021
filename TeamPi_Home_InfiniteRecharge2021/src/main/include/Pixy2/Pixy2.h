@@ -15,7 +15,7 @@
 const int PIXY_BUFFERSIZE = 0x104;
 const int PIXY_SEND_HEADER_SIZE = 4;
 const int PIXY_MAX_PROGNAME = 33;
-const int PIXY_DEFAULT_ARGVAL = 0x80000000;
+const int PIXY_DEFAULT_ARGVAL = 0x0;
 const int PIXY_CHECKSUM_SYNC = 0xc1af;
 const int PIXY_NO_CHECKSUM_SYNC = 0xc1ae;
 
@@ -34,13 +34,13 @@ const uint8_t PIXY_TYPE_REQUEST_LAMP = 0x16;
 const uint8_t PIXY_TYPE_REQUEST_FPS = 0x18;
 
 // Return result values
-const uint8_t PIXY_RESULT_OK = 0;
-const uint8_t PIXY_RESULT_ERROR = -1;
-const uint8_t PIXY_RESULT_BUSY = -2;
-const uint8_t PIXY_RESULT_CHECKSUM_ERROR = -3;
-const uint8_t PIXY_RESULT_TIMEOUT = -4;
-const uint8_t PIXY_RESULT_BUTTON_OVERRIDE = -5;
-const uint8_t PIXY_RESULT_PROG_CHANGING = -6;
+const int PIXY_RESULT_OK = 0;
+const int PIXY_RESULT_ERROR = -1;
+const int PIXY_RESULT_BUSY = -2;
+const int PIXY_RESULT_CHECKSUM_ERROR = -3;
+const int PIXY_RESULT_TIMEOUT = -4;
+const int PIXY_RESULT_BUTTON_OVERRIDE = -5;
+const int PIXY_RESULT_PROG_CHANGING = -6;
 
 // RC-servo values
 const int PIXY_RCS_MIN_POS = 0;
@@ -52,9 +52,9 @@ const int PIXY_RCS_CENTER_POS = ((PIXY_RCS_MAX_POS - PIXY_RCS_MIN_POS) / 2);
 class Pixy2
 {
 private:
-    Link2Roborio* Link;
+    SPI_Link* Link;
 	uint8_t getSync();
-	Pixy2(Link2Roborio *link);
+	Pixy2(SPI_Link *link);
 
 	int frameWidth = -1;
 	int frameHeight = -1;

@@ -1,8 +1,13 @@
 #include "Pixy2/Pixy2Program.h"
 
-Pixy2Program::Pixy2Program(/* args */)
+Pixy2Program::Pixy2Program(Pixy2 *pixy, Pixy2CCC *ccc, Pixy2Video* video)
 {
-    Pixy2_Init();
+    this->pixy = pixy;
+    this->ccc = ccc;
+    this->video = video;
+    this->pixy->init();
+    this->pixy->changeProg("color_connected_components");
+    pixyTimer.Start();
 }
 
 Pixy2Program::~Pixy2Program()
@@ -10,11 +15,7 @@ Pixy2Program::~Pixy2Program()
 }
 //Initialise Pixy2
 void Pixy2Program::Pixy2_Init(){
-    this->pixy = new Pixy2(Pixy2::LinkType::SPI);
-    this->pixy->init();
-    this->pixy->changeProg("color_connected_components");
-    this->ccc = new Pixy2CCC(pixy);
-    this->video = new Pixy2Video(pixy);
+
     pixyTimer.Start();
 }
 
@@ -29,11 +30,11 @@ Block* Pixy2Program::trackBlock(uint8_t index)
     for (i=0; i< this->ccc->numBlocks; i++)
     {
     if (index == this->ccc->getBlockCache()[i].data()->getIndex())
-    return ccc->getBlockCache()[i].data();
-    if (pixyTimer.HasPeriodPassed(0.01))
-    {
-        return NULL;
-    }
+    return this->ccc->getBlockCache()[i].data();
+        if (pixyTimer.HasPeriodPassed(0.01))
+        {
+            return NULL;
+        }
     
     }
 
@@ -76,7 +77,7 @@ void Pixy2Program::runPixy2Intake(){
 
     // If we've found a block, find it, track it
     if (index>=0)
-        block = trackBlock(index);
+        block = trackBlock(index); 
     
     //if we find something, track... But do this while tracking   
     if (block)

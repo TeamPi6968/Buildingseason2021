@@ -14,9 +14,9 @@
 class Pixy2Program
 {
 private:
-    Pixy2* pixy;
-    Pixy2CCC* ccc;
-    Pixy2Video* video;
+    Pixy2 *pixy;
+    Pixy2CCC *ccc;
+    Pixy2Video *video;
     frc::Timer pixyTimer;
 
 //Connected Components predefined details
@@ -25,14 +25,14 @@ private:
 // uint8_t maxBlocks = 0xff;
 
     //General logic
-    void Pixy2_Init();
+ 
     Block *trackBlock(uint8_t index);
     int acquireBlock();
 
 public:
-    Pixy2Program();
+    Pixy2Program(Pixy2 *pixy, Pixy2CCC *ccc, Pixy2Video* video);
     ~Pixy2Program();
-
+   void Pixy2_Init();
     void runPixy2Intake();
 };
 
@@ -41,12 +41,3 @@ public:
 
 
 
-
-
-//General logic
-void Pixy2_Init();
-Block *trackBlock(uint8_t index);
-int acquireBlock();
-
-//intake ball logic
-void runPixy2Intake();

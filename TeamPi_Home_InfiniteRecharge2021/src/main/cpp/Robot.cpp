@@ -10,9 +10,11 @@ void Robot::RobotInit() {
 }
 void Robot::RobotPeriodic() {}
 
-void Robot::AutonomousInit() {}
+void Robot::AutonomousInit() {
+}
 void Robot::AutonomousPeriodic() {
-  DP.Bounce();
+  //DP.Bounce();
+  ball_detect.runPixy2Intake();
 }
 
 void Robot::TeleopInit() {

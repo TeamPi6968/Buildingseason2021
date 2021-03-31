@@ -5,7 +5,7 @@
  * 
  * @param link {@link Link} to communicate with Pixy2
  */
-Pixy2::Pixy2(Link2Roborio *link) {
+Pixy2::Pixy2(SPI_Link *link) {
     this->Link = link;
     // Initializes send/return buffer and payload buffer
     buffer = (uint8_t*)malloc(PIXY_BUFFERSIZE);
@@ -23,15 +23,15 @@ Pixy2::Pixy2(Link2Roborio *link) {
  */
 int Pixy2::init(int argument) {
     // Opens link
-    int ret = Link->open(argument);
-    if (ret >= 0) {
-        // Tries to connect, times out if unable to communicate after 5 seconds
+    //int ret = Link->open(argument);
+    if (true) {
+        //Tries to connect, times out if unable to communicate after 5 seconds
         for (long t = frc::GetTime(); frc::GetTime() - t < 5000;) {
             // Gets version and resolution to check if communication is successful and stores for future use
-            if (getVersion() >= 0) {
-                getResolution();
-                return PIXY_RESULT_OK;
-            }
+            // if (getVersion() >= 0) {
+            //     getResolution();
+            //     return PIXY_RESULT_OK;
+            // }
             frc::Wait(0.005);
         }
         return PIXY_RESULT_TIMEOUT;
@@ -46,6 +46,7 @@ int Pixy2::init(int argument) {
  * @return Pixy2 error code
  */
 int Pixy2::init() {
+    std::cout<<"init";
     return init(PIXY_DEFAULT_ARGVAL);
 }
 
