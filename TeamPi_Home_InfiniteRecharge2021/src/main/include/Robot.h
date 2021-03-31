@@ -14,6 +14,8 @@
 
 //#include <Pixy2/Pixy2CCC.h>
 #include <Pixy2/Pixy2Program.h>
+#include "SwerveDrive/DrivePattern.h"
+
 
 
 
@@ -25,7 +27,7 @@ class Robot : public frc::TimedRobot {
   Intake ModIntake;
   Loader ModTurret;
   Loader test;
-  
+  DrivePattern DP;
 
 int ButtonA = 1;
 int ButtonB = 2;

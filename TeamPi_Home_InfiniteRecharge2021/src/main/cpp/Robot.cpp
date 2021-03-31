@@ -12,8 +12,7 @@ void Robot::RobotPeriodic() {}
 
 void Robot::AutonomousInit() {}
 void Robot::AutonomousPeriodic() {
-  // test for autonomous driving.
-  Swerve.SetDesiredPositionRobot(0,0);
+  DP.Bounce();
 }
 
 void Robot::TeleopInit() {
@@ -44,7 +43,9 @@ void Robot::DisabledInit() {}
 void Robot::DisabledPeriodic() {}
 
 void Robot::TestInit() {}
-void Robot::TestPeriodic() {}
+void Robot::TestPeriodic() {
+  DP.RecBounce();
+}
 
 
 #ifndef RUNNING_FRC_TESTS

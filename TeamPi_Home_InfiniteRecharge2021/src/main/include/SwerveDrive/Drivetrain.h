@@ -30,6 +30,12 @@ class Drivetrain{
   // Set the robot to a determent position on the field 
   void SetDesiredPositionRobot (double Distance, double Angle);
 
+  double GetPosition();
+
+  double GetPositionDrive();
+  double GetPositionAngle();
+
+
 
  private:
   // create the swervedrive modules.

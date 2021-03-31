@@ -161,7 +161,15 @@ int idk2 = 0;
 // Set the robot to a determent position on the field 
 void Drivetrain::SetDesiredPositionRobot (double Distance, double Angle){
     module_frontLeft.SetDesiredPosition(Distance, Angle);
-    module_frontRight.SetDesiredState(Distance, Angle);
-    module_backLeft.SetDesiredState(Distance, Angle);
-    module_backRight.SetDesiredState(Distance, Angle);
+    module_frontRight.SetDesiredPosition(Distance, Angle);
+    module_backLeft.SetDesiredPosition(Distance, Angle);
+    module_backRight.SetDesiredPosition(Distance, Angle);
+}
+
+double Drivetrain::GetPositionDrive(){
+    return module_frontLeft.GetModulePositionDrive();
+}
+
+double Drivetrain::GetPositionAngle(){
+    return module_frontLeft.GetModulePositionAngle();
 }

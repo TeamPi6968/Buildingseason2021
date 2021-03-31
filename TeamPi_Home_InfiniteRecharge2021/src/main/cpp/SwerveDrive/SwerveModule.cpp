@@ -65,3 +65,11 @@ void SwerveModule::SetDesiredPosition(double Distance, double Angle){
     TurningMotor.Set(ControlMode::Position, Angle);
     DriveMotor.Set(ControlMode::Position, Distance);
 }
+
+double SwerveModule::GetModulePositionDrive(){
+    return DriveMotor.GetSelectedSensorPosition();
+}
+
+double SwerveModule::GetModulePositionAngle(){
+    return TurningMotor.GetSelectedSensorPosition();
+}
