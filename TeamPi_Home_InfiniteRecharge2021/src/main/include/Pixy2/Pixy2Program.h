@@ -9,7 +9,7 @@
 #pragma once
 #include "Pixy2CCC.h"
 #include "Pixy2Video.h"
-//#include <iostream>
+#include <iostream>
 
 class Pixy2Program
 {
@@ -17,6 +17,7 @@ private:
     Pixy2* pixy;
     Pixy2CCC* ccc;
     Pixy2Video* video;
+    frc::Timer pixyTimer;
 
 //Connected Components predefined details
 // bool wait = true;

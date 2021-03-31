@@ -4,6 +4,7 @@
 Pixy2CCC::Pixy2CCC(Pixy2 *pixy)
 {
     this->pixy = pixy;
+    pixy->init(0);
 }
 
 Pixy2CCC::~Pixy2CCC()

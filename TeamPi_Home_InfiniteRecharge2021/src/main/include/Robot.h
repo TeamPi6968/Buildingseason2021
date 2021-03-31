@@ -12,13 +12,14 @@
 #include "SwerveDrive/Drivetrain.h"
 #include "Intake_Storage_Loader/Intake.h"
 
-#include <Pixy2/Pixy2CCC.h>
-//#include <PixyProgram.h>
+//#include <Pixy2/Pixy2CCC.h>
+#include <Pixy2/Pixy2Program.h>
 
 
 
 class Robot : public frc::TimedRobot {
  private:
+  Pixy2Program ball_detect;
   Drivetrain Swerve;
   frc::Joystick m_stick{0};
   Intake ModIntake;

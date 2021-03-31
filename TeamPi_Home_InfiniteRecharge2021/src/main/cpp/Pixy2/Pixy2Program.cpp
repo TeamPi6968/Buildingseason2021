@@ -15,6 +15,7 @@ void Pixy2Program::Pixy2_Init(){
     this->pixy->changeProg("color_connected_components");
     this->ccc = new Pixy2CCC(pixy);
     this->video = new Pixy2Video(pixy);
+    pixyTimer.Start();
 }
 
 // Find the block with the given index.  In other words, find the same object in the current
@@ -22,12 +23,18 @@ void Pixy2Program::Pixy2_Init(){
 // If it's not in the current frame, return NULL
 Block* Pixy2Program::trackBlock(uint8_t index)
 {
+    pixyTimer.Reset();
     uint8_t i;
 
     for (i=0; i< this->ccc->numBlocks; i++)
     {
     if (index == this->ccc->getBlockCache()[i].data()->getIndex())
     return ccc->getBlockCache()[i].data();
+    if (pixyTimer.HasPeriodPassed(0.01))
+    {
+        return NULL;
+    }
+    
     }
 
     return NULL;
