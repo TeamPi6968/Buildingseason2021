@@ -12,20 +12,17 @@
 #include "SwerveDrive/Drivetrain.h"
 #include "Intake_Storage_Loader/Intake.h"
 
-//#include <Pixy2/Pixy2CCC.h>
-#include <Pixy2/Pixy2Program.h>
 #include "SwerveDrive/DrivePattern.h"
-
+#include "Intake_Storage_Loader/C04_PI_Pixy.h"
 
 
 
 class Robot : public frc::TimedRobot {
  private:
-  Pixy2Program* ball_detect;
+//  Pixy2Program* ball_detect;
 
-  Pixy2* pixy;
-  Pixy2CCC* ccc;
-  Pixy2Video* video;
+//  Get_Pixy2 *pixy;
+
   Drivetrain Swerve;
   frc::Joystick m_stick{0};
   Intake ModIntake;
@@ -60,8 +57,6 @@ int ButtonSTART = 8;
 
   void TestInit() override;
   void TestPeriodic() override;
-
-  void Pixy_Setup();
 
 
 };

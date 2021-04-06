@@ -20,7 +20,7 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
-
+//  pixy = new Get_Pixy2(frc::I2C::kOnboard, 8);
   Swerve.SetAllPID();
   Swerve.ZeroDrivetrain();
 
@@ -28,6 +28,8 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
   Swerve.Drive(m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
+
+//  cout<<"Pixy Value: "<< pixy->GetBlocks();
 
 
   //milans functions
@@ -41,18 +43,6 @@ void Robot::TeleopPeriodic() {
   ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
   }
 
-void Robot::Pixy_Setup(){
-  int temp;
-  this->pixy = new Pixy2(Pixy2::LinkType::SPI);
-  temp = this->pixy->init();
-
-  cout<<temp;
-  //this->ccc = new Pixy2CCC(pixy);
-  // this->video = new Pixy2Video(pixy);
-
-//  ball_detect = new Pixy2Program(pixy,ccc,video);
-//  ball_detect->Pixy2_Init();
-}
 
 void Robot::DisabledInit() {}
 void Robot::DisabledPeriodic() {}
