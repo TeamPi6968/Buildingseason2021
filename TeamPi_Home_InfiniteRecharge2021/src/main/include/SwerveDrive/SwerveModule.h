@@ -20,7 +20,8 @@ class SwerveModule{
     // init all the swerve motors of the modules
     SwerveModule(int DriveMotorID, int TurningMotorID);
     void SetPID();
-    void SetPID(double kp,double ki,double kd);
+    void SetPIDDrive(double kp, double ki, double kd);
+    void SetPIDTurning(double kp,double ki,double kd);
     // Zero the wheel position of the swerve.
     void SwerveZero();
     // Set the swerve wheel direction back to 0.
@@ -30,9 +31,14 @@ class SwerveModule{
     // Set the module to a determent position on the field 
     void SetDesiredPosition(double Distance, double Angle);
 
+    //Stop Motors
+    void StopMotor();
+    void StopDriving();
+
     double GetModulePosition();
 
     double GetModulePositionDrive();
+    double GetModuleVelocityDrive();
     double GetModulePositionAngle();
 
 

@@ -37,8 +37,6 @@ void Robot::TeleopPeriodic() {
   
   ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),IRSensor.Get());
 
-
-
   //ModTurret.test(m_stick.GetRawButton(ButtonX));
   ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
   }
@@ -47,7 +45,9 @@ void Robot::TeleopPeriodic() {
 void Robot::DisabledInit() {}
 void Robot::DisabledPeriodic() {}
 
-void Robot::TestInit() {}
+void Robot::TestInit() {
+  DP.ClearFile();
+}
 void Robot::TestPeriodic() {
   DP.RecBounce();
 }

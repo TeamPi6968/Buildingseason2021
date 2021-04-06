@@ -20,6 +20,17 @@ SwerveModule::SwerveModule(int DriveMotorID, int TurningMotorID)
     TurningMotor.ConfigSelectedFeedbackCoefficient(TurnCoef, 0, TimeOut);
 }
 
+
+void SwerveModule::StopMotor(){
+    DriveMotor.StopMotor();
+    TurningMotor.StopMotor();
+}
+
+void SwerveModule::StopDriving(){
+    DriveMotor.Set(ControlMode::Velocity, 0.0);
+    TurningMotor.Set(ControlMode::Velocity, 0.0);
+}
+
 void SwerveModule::SetPID(){
     // set PID values for the drive motor.
     DriveMotor.Config_kP(0, kP_Drive, TimeOut);
@@ -32,16 +43,19 @@ void SwerveModule::SetPID(){
     TurningMotor.Config_kD(0, kD_Turning, TimeOut);
 }
 
-void SwerveModule::SetPID(double kp,double ki,double kd){
+void SwerveModule::SetPIDDrive(double kp, double ki, double kd){
     // set PID values for the drive motor.
-    DriveMotor.Config_kP(0, kP_Drive, TimeOut);
-    DriveMotor.Config_kI(0, kI_Drive, TimeOut);
-    DriveMotor.Config_kD(0, kD_Drive, TimeOut);
+    DriveMotor.Config_kP(0, kp, TimeOut);
+    DriveMotor.Config_kI(0, ki, TimeOut);
+    DriveMotor.Config_kD(0, kd, TimeOut);
+}
 
+//Set PID only turning
+void SwerveModule::SetPIDTurning(double kp,double ki,double kd){
     // set PID values for the turning motor.
-    TurningMotor.Config_kP(0, kP_Turning, TimeOut);
-    TurningMotor.Config_kI(0, kI_Turning, TimeOut);
-    TurningMotor.Config_kD(0, kD_Turning, TimeOut);
+    TurningMotor.Config_kP(0, kp, TimeOut);
+    TurningMotor.Config_kI(0, ki, TimeOut);
+    TurningMotor.Config_kD(0, kd, TimeOut);
 }
 
 // zero the encoders of the swerve module.
@@ -66,8 +80,13 @@ void SwerveModule::SetDesiredPosition(double Distance, double Angle){
     DriveMotor.Set(ControlMode::Position, Distance);
 }
 
+
 double SwerveModule::GetModulePositionDrive(){
     return DriveMotor.GetSelectedSensorPosition();
+}
+
+double SwerveModule::GetModuleVelocityDrive(){
+    return DriveMotor.GetSelectedSensorVelocity();
 }
 
 double SwerveModule::GetModulePositionAngle(){
