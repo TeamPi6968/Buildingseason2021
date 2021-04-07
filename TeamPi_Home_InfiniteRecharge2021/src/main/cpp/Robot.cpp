@@ -25,19 +25,19 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-  //For interstellar Accuracy Challenge
-  startIACstateFlow();
+  // //For interstellar Accuracy Challenge
+  //startIACstateFlow();
 
-  // Swerve.Drive(m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
+  Swerve.Drive(m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
 
 
-  // //milans functions
-  // ModIntake.IntakeSolonoids(m_stick.GetRawButtonPressed(ButtonRB),ModTurret.AmountCellsInStorage); //6 = right top trigger
+  //milans functions
+  ModIntake.IntakeSolonoids(m_stick.GetRawButtonPressed(ButtonRB),ModTurret.AmountCellsInStorage); //6 = right top trigger
   
-  // ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),IRSensor.Get());
+  ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),IRSensor.Get());
 
-  // //ModTurret.test(m_stick.GetRawButton(ButtonX));
-  // ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
+  //ModTurret.test(m_stick.GetRawButton(ButtonX));
+  ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
 }
 
 

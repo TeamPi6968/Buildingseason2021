@@ -41,6 +41,8 @@ class Robot : public frc::TimedRobot {
   // int driveToLoad;
   // int driveToShoot;
 
+  int iterateStates;
+
   enum bigStates
   {
     shoot = 0,
@@ -84,6 +86,40 @@ void init_States(){
   D2S = dslvl_0;
   D2L = dlvl_0;
   shootState = slvl_0;
+  iterateStates = 0;
+}
+
+//Moves to the next level state for all cases.
+void nextState(){
+  switch (iterateStates)
+  {
+  default:
+    iterateStates = 0;
+  case 0:
+    D2S = dslvl_0;
+    D2L = dlvl_0;
+    shootState = slvl_0;
+    iterateStates++;
+    break;
+  case 1:
+    D2S = dslvl_1;
+    D2L = dlvl_1;
+    shootState = slvl_1;
+    iterateStates++;
+    break;  
+  case 2:
+    D2S = dslvl_2;
+    D2L = dlvl_2;
+    shootState = slvl_2;
+    iterateStates++;
+    break;
+  case 3:
+    D2S = dslvl_3;
+    D2L = dlvl_3;
+    shootState = slvl_3;
+    iterateStates++;
+    break;
+  }
 }
 
 void startIACstateFlow(){
@@ -107,7 +143,7 @@ void startIACstateFlow(){
     default:
       break;
     }
-
+    bigState = driveToLoad;
     break;
   case driveToLoad:
     switch (D2L)
@@ -127,9 +163,12 @@ void startIACstateFlow(){
     default:
       break;
     }
+    bigState = load;
     break;
   case load:  //Tell what driveToShoot level should be next
 
+    nextState();
+    bigState = driveToShoot;
     break;
   case driveToShoot:
     switch (D2S)
@@ -149,7 +188,7 @@ void startIACstateFlow(){
     default:
       break;
     }
-
+    bigState = shoot;
     break;
   default:
     break;
