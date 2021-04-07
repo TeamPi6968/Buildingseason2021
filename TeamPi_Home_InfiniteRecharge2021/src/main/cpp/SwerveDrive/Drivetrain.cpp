@@ -65,6 +65,22 @@ void Drivetrain::ZeroDrivetrain(){
     module_backRight.SwerveZero();
 }
 
+//Stop
+void Drivetrain::Stop(){
+    module_frontLeft.StopMotor();
+    module_frontRight.StopMotor();
+    module_backLeft.StopMotor();
+    module_backRight.StopMotor();   
+}
+
+//Stop drive movement
+void Drivetrain::StopDrive(){
+    module_frontLeft.StopDriving();
+    module_frontRight.StopDriving();
+    module_backLeft.StopDriving();
+    module_backRight.StopDriving();   
+}
+
 // home all the modules.
 void Drivetrain::DrivetrainHome(){
     module_frontLeft.SwerveHome();
@@ -79,6 +95,22 @@ void Drivetrain::SetAllPID(){
     module_frontRight.SetPID();
     module_backLeft.SetPID();
     module_backRight.SetPID();
+}
+
+// Set all PID values for each module.
+void Drivetrain::SetDrivePID(double kp, double ki, double kd){
+    module_frontLeft.SetPIDDrive(kp,ki,kd);
+    module_frontRight.SetPIDDrive(kp,ki,kd);
+    module_backLeft.SetPIDDrive(kp,ki,kd);
+    module_backRight.SetPIDDrive(kp,ki,kd);
+}
+
+// Set all PID values for each module.
+void Drivetrain::SetTurnPID(double kp, double ki, double kd){
+    module_frontLeft.SetPIDTurning(kp, ki, kd);
+    module_frontRight.SetPIDTurning(kp, ki, kd);
+    module_backLeft.SetPIDTurning(kp, ki, kd);
+    module_backRight.SetPIDTurning(kp, ki, kd);
 }
 
 // Drive with the swerve drive.
@@ -166,8 +198,19 @@ void Drivetrain::SetDesiredPositionRobot (double Distance, double Angle){
     module_backRight.SetDesiredPosition(Distance, Angle);
 }
 
+void Drivetrain::SetDesiredStateRobot(double speed, double angle){
+    module_frontLeft.SetDesiredState(speed, angle);
+    module_frontRight.SetDesiredState(speed, angle);
+    module_backLeft.SetDesiredState(speed, angle);
+    module_backRight.SetDesiredState(speed, angle);
+}
+
 double Drivetrain::GetPositionDrive(){
     return module_frontLeft.GetModulePositionDrive();
+}
+
+double Drivetrain::GetVelocityDrive(){
+    return module_frontLeft.GetModuleVelocityDrive();
 }
 
 double Drivetrain::GetPositionAngle(){

@@ -18,6 +18,8 @@ class Drivetrain{
  public:
   // Drivetrain();
   void SetAllPID();
+  void SetTurnPID(double kp, double ki, double kd);
+  void SetDrivePID(double kp, double ki, double kd);
   // Zero all the wheel position of the swerve.
   void ZeroDrivetrain();
   // Set all the swerve wheel direction back to 0.
@@ -29,10 +31,16 @@ class Drivetrain{
   void Drive(double xValue, double yValue, double rotation);
   // Set the robot to a determent position on the field 
   void SetDesiredPositionRobot (double Distance, double Angle);
+  void SetDesiredStateRobot(double speed, double angle);
+
+  //Stop Everything
+  void Stop();
+  void StopDrive();
 
   double GetPosition();
 
   double GetPositionDrive();
+  double GetVelocityDrive();
   double GetPositionAngle();
 
 
