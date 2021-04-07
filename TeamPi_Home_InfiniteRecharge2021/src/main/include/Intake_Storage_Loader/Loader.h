@@ -49,7 +49,9 @@ static const int SparkMaxLoaderID = 19;
 
 // speeds of motors
 float StorageMotorMaxSpeed = -0.4;// max speed of shoting motors
+float StorageMotorMaxSpeedRefill = -0.2;
 float LoaderMotorMaxSpeed = -0.7;// max speed of shoting motors
+float LoaderMotorMaxSpeedRefill = -0.2;
 float turretMotorMaxSpeed = 0.7;// max speed of shoting motors
 float turretShotingMaxSpeed = 0.8;// max speed of shoting motors
 float turretShotingMinSpeed = 0.0; //minimal speed of shoting motors

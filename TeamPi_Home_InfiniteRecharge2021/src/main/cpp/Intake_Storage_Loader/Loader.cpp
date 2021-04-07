@@ -211,8 +211,24 @@ void Loader::Shoot(bool buttonPressed, bool IRSensor)
     shootingMotorSlave->Set(turretShotingMinSpeed);
     //spark motors
     SparkMaxStorage.Set(0);
-    // spin loaderMotor spark max ID: 18
+    // stop loaderMotor spark max ID: 18
     SparkMaxLoader.Set(0);
+/*
+    if (shotingStatus == 1 and IRSensor)
+    {
+      //spark motors
+      SparkMaxStorage.Set(StorageMotorMaxSpeed);
+      // spin loaderMotor spark max ID: 18
+      SparkMaxLoader.Set(LoaderMotorMaxSpeedRefill);
+    }
+    else if (shotingStatus == 1 and !IRSensor)
+    {
+      //spark motors
+      SparkMaxStorage.Set(0);
+      // spin loaderMotor spark max ID: 18
+      SparkMaxLoader.Set(0); 
+     
+    } */
   }
 }
 
