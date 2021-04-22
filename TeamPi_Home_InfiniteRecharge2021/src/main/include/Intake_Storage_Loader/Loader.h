@@ -7,7 +7,7 @@
 #include <ctre/phoenix.h>
 #include <frc/Timer.h>
 #include <frc/GenericHID.h>
-//#include <frc/Shuffleboard.h>
+#include <frc/smartdashboard/SmartDashboard.h> 
 
 class Loader
 {

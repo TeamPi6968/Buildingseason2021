@@ -12,16 +12,22 @@
 
 using namespace std;
 
-void Outtake::Move(double xValue, double yValue)
+void Outtake::Move(double xValue, double yValue, bool startButtonPressed, bool L3Pressed, bool R3Pressed)
 {
-  if (rotationHomed)                                      // Can't turn while homing
-  {
-    SetRotation(xValue);
-  }
+  Calibration(startButtonPressed);
+  Home(L3Pressed, R3Pressed);
 
-  if (angleHomed)                                         // Can't change angle while homing
+  if (Calibrated)
   {
-    SetAngle(yValue);
+    if (rotationHomed) // Can't turn while homing
+    {
+      SetRotation(xValue);
+    }
+
+    if (angleHomed) // Can't change angle while homing
+    {
+      SetAngle(yValue);
+    }
   }
 }
 
@@ -33,8 +39,8 @@ void Outtake::Home(bool L3Pressed, bool R3Pressed)
 
 void Outtake::Calibration(bool startButtonPressed)
 {
-  Reset(startButtonPressed);                            // Reset and start calibrating again
-  
+  Reset(startButtonPressed); // Reset and start calibrating again
+
   if (!Calibrated)
   {
     AngleCalibration();
@@ -52,26 +58,26 @@ void Outtake::RotationCalibration()
 {
   if (!rotationCalibrated)
   {
-    switch(rotationLimit.Get())                         // Check if rotation limit has been reached
+    switch (rotationLimit.Get()) // Check if rotation limit has been reached
     {
-      case false:                                       // If not
-      SparkMaxRotationMotor.Set(rotationSpeed);         // Turn outtake towards limit switch
+    case false:                                 // If not
+      SparkMaxRotationMotor.Set(rotationSpeed); // Turn outtake towards limit switch
       break;
-      
-      case true:                                        // When reached
-      SparkMaxRotationMotor.Set(0);                     // Stop motor
-      SparkMaxRotationEncoder->SetPosition(0);          // Set encoder value to 0
+
+    case true:                                 // When reached
+      SparkMaxRotationMotor.Set(0);            // Stop motor
+      SparkMaxRotationEncoder->SetPosition(0); // Set encoder value to 0
       rotationLimitPressed = true;
       break;
     }
 
-    if (rotationLimitPressed)                           // After the limit has been pressed
+    if (rotationLimitPressed) // After the limit has been pressed
     {
-      rotationHome(false);                              // Outtake will rotate towards its home position
+      rotationHome(false); // Outtake will rotate towards its home position
 
-      if (rotationHomed)                                // Once it has reached its home position
+      if (rotationHomed) // Once it has reached its home position
       {
-        rotationCalibrated = true;                      // The outtake's rotation will be calibrated
+        rotationCalibrated = true; // The outtake's rotation will be calibrated
         cout << "\nRotation Calibrated";
       }
     }
@@ -82,23 +88,23 @@ void Outtake::AngleCalibration()
 {
   if (!angleCalibrated)
   {
-    switch(angleLimit.Get())                            // Check if the angle limit has been reached
+    switch (angleLimit.Get()) // Check if the angle limit has been reached
     {
-      case false:                                       // If not
-        SparkMaxAngleMotor.Set(angleSpeed);             // Move the shute towards the limit switch
-        break;
-      case true:
-        SparkMaxAngleMotor.Set(0);                      // Stop the motor
-        SparkMaxAngleEncoder->SetPosition(0);           // Set encoder value to 0
-        angleLimitPressed = true;
-        break;
+    case false:                           // If not
+      SparkMaxAngleMotor.Set(angleSpeed); // Move the shute towards the limit switch
+      break;
+    case true:
+      SparkMaxAngleMotor.Set(0);            // Stop the motor
+      SparkMaxAngleEncoder->SetPosition(0); // Set encoder value to 0
+      angleLimitPressed = true;
+      break;
     }
 
-    if (angleLimitPressed)                              // After the limit has been pressed
+    if (angleLimitPressed) // After the limit has been pressed
     {
-      angleHome(false);                                 // Move hood towards it's home positon
-      if (angleHomed)                                   // Once it has reached it's home position
-      {                                                 // The hood will be calibrated
+      angleHome(false); // Move hood towards it's home positon
+      if (angleHomed)   // Once it has reached it's home position
+      {                 // The hood will be calibrated
         angleCalibrated = true;
         cout << "\nAngle Calibrated";
       }
@@ -108,65 +114,68 @@ void Outtake::AngleCalibration()
 
 void Outtake::SetRotation(double xValue)
 {
-  if (xValue >= -1 && xValue < 0)                                               // If rotation is counter clockwise
+  if (xValue >= -1 && xValue < 0) // If rotation is counter clockwise
   {
-    if (SparkMaxRotationEncoder->GetPosition() < minRotationEncoder)            // When past the soft limit
+    if (SparkMaxRotationEncoder->GetPosition() < minRotationEncoder) // When past the soft limit
     {
-      SparkMaxRotationMotor.Set(0);                                             // Stop/Don't move the motor
+      SparkMaxRotationMotor.Set(0); // Stop/Don't move the motor
     }
-    else 
+    else
     {
-      if (SparkMaxRotationEncoder->GetPosition() < (minRotationEncoder + 3))    // Getting close to the soft limit
+      if (SparkMaxRotationEncoder->GetPosition() < (minRotationEncoder + 3)) // Getting close to the soft limit
       {
-        if (SparkMaxRotationEncoder->GetPosition() < (minRotationEncoder + 1))  // Getting even closer to the soft limit
+        if (SparkMaxRotationEncoder->GetPosition() < (minRotationEncoder + 1)) // Getting even closer to the soft limit
         {
-          SparkMaxRotationMotor.Set(xValue*0.05);                               // Turn very slowly to prevent overshooting
+          SparkMaxRotationMotor.Set(xValue * 0.05); // Turn very slowly to prevent overshooting
         }
         else
         {
-          SparkMaxRotationMotor.Set(xValue*0.1);                                // Turn a bit slower as we're getting nearer to the limit
-        } 
+          SparkMaxRotationMotor.Set(xValue * 0.1); // Turn a bit slower as we're getting nearer to the limit
+        }
       }
       else
       {
-        SparkMaxRotationMotor.Set(xValue*0.2);                                  // Move at normal speed
+        SparkMaxRotationMotor.Set(xValue * 0.2); // Move at normal speed
       }
     }
   }
 
-  else if (xValue > 0 && xValue <= 1)                                           // If rotation is clockwise
+  else if (xValue > 0 && xValue <= 1) // If rotation is clockwise
   {
-    if (SparkMaxRotationEncoder->GetPosition() > maxRotationEncoder)            // When past the soft limit
+    if (SparkMaxRotationEncoder->GetPosition() > maxRotationEncoder) // When past the soft limit
     {
-      SparkMaxRotationMotor.Set(0);                                             // Stop/Don't move the motor
+      SparkMaxRotationMotor.Set(0); // Stop/Don't move the motor
     }
-    else 
+    else
     {
-      if (SparkMaxRotationEncoder->GetPosition() > (maxRotationEncoder - 3))    // Getting close to the soft limit
+      if (SparkMaxRotationEncoder->GetPosition() > (maxRotationEncoder - 3)) // Getting close to the soft limit
       {
-        if (SparkMaxRotationEncoder->GetPosition() > (maxRotationEncoder - 1))  // Getting even closer to the soft limit
+        if (SparkMaxRotationEncoder->GetPosition() > (maxRotationEncoder - 1)) // Getting even closer to the soft limit
         {
-          SparkMaxRotationMotor.Set(xValue*0.05);                               // Move very slowly
+          SparkMaxRotationMotor.Set(xValue * 0.05); // Move very slowly
         }
         else
         {
-          SparkMaxRotationMotor.Set(xValue*0.1);                                // Move a bit slower
-        } 
+          SparkMaxRotationMotor.Set(xValue * 0.1); // Move a bit slower
+        }
       }
       else
       {
-        SparkMaxRotationMotor.Set(xValue*0.2);                                  // Move at normal speed  
+        SparkMaxRotationMotor.Set(xValue * 0.2); // Move at normal speed
       }
     }
   }
-  else {SparkMaxRotationMotor.Set(0);}                                          // When xValue = 0 motor doesn't move
+  else
+  {
+    SparkMaxRotationMotor.Set(0);
+  } // When xValue = 0 motor doesn't move
 }
 
 void Outtake::SetAngle(double yValue)
 {
-  if (yValue >= -1 && yValue < 0)                                               // Negative joystick input
+  if (yValue >= -1 && yValue < 0) // Negative joystick input
   {
-    if (SparkMaxAngleEncoder->GetPosition() < minAngleEncoder)                  // Motor exceeds minimum value
+    if (SparkMaxAngleEncoder->GetPosition() < minAngleEncoder) // Motor exceeds minimum value
     {
       SparkMaxAngleMotor.Set(0);
     }
@@ -190,7 +199,7 @@ void Outtake::SetAngle(double yValue)
   {
     if (SparkMaxAngleEncoder->GetPosition() > maxAngleEncoder) // Motor exceeds maximum value
     {
-      SparkMaxAngleMotor.Set(0);    
+      SparkMaxAngleMotor.Set(0);
     }
     else
     {
@@ -209,7 +218,7 @@ void Outtake::SetAngle(double yValue)
       {
         SparkMaxAngleMotor.Set(0.2 * yValue);
       }
-    } 
+    }
   }
   else
   {
@@ -230,7 +239,7 @@ void Outtake::rotationHome(bool L3Pressed)
     if (SparkMaxRotationEncoder->GetPosition() > rotationHomePositionMax)
     {
       if (SparkMaxRotationEncoder->GetPosition() < rotationHomePositionMax + 3)
-      { 
+      {
         if (SparkMaxRotationEncoder->GetPosition() < rotationHomePositionMax + 1)
         {
           SparkMaxRotationMotor.Set(-0.05);
@@ -241,15 +250,14 @@ void Outtake::rotationHome(bool L3Pressed)
         }
       }
       else
-      {    
+      {
         SparkMaxRotationMotor.Set(-0.2);
       }
-
     }
     else if (SparkMaxRotationEncoder->GetPosition() < rotationHomePositionMin)
     {
       if (SparkMaxRotationEncoder->GetPosition() > rotationHomePositionMin - 3)
-      { 
+      {
         if (SparkMaxRotationEncoder->GetPosition() > rotationHomePositionMin - 1)
         {
           SparkMaxRotationMotor.Set(0.05);
@@ -346,6 +354,7 @@ void Outtake::displayRotationEncoder()
 {
   cout << "\nEncoder: ";
   cout << SparkMaxRotationEncoder->GetPosition();
+  frc::SmartDashboard::PutNumber("Rotation of turret", SparkMaxRotationEncoder->GetPosition()); // displays the value in Shuffleboard
 }
 
 // Display the angle encoder values to the RioLog
@@ -353,4 +362,5 @@ void Outtake::displayAngleEncoder()
 {
   cout << "\nEncoder: ";
   cout << SparkMaxAngleEncoder->GetPosition();
+  frc::SmartDashboard::PutNumber("Angle of turret", SparkMaxAngleEncoder->GetPosition());// displays the value in Shuffleboard
 }

@@ -22,16 +22,16 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-  Swerve.Drive(m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
+  // Swerve.Drive(m_stick.GetX(), -m_stick.GetY(), m_stick.GetRawAxis(4));
 
 
   //milans functions
   ModIntake.IntakeSolonoids(m_stick.GetRawButtonPressed(ButtonRB),ModTurret.AmountCellsInStorage); //6 = right top trigger
-  
   ModTurret.Shoot(m_stick.GetRawButtonPressed(ButtonB),IRSensor.Get());
 
   //ModTurret.test(m_stick.GetRawButton(ButtonX));
   ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stick.GetRawButtonPressed(ButtonA));
+  Turret.Move(m_stickTurret.GetX(),m_stickTurret.GetY(), m_stickTurret.GetRawButton(ButtonSTART),m_stickTurret.GetRawButtonPressed(L3),m_stickTurret.GetRawButtonPressed(R3));  
   }
 
 

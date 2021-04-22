@@ -10,6 +10,7 @@
 
 #include <frc/DigitalInput.h>
 #include <rev/CANSparkMax.h>
+#include <frc/smartdashboard/SmartDashboard.h> 
 
 using namespace frc;
 using namespace rev;
@@ -67,7 +68,7 @@ bool rotationHomed = false;
 bool angleHomed = false;
 
 // General functions
-void Move(double xValue, double yValue);
+void Move(double xValue, double yValue, bool startButtonPressed, bool L3Pressed, bool R3Pressed);
 void Home(bool L3Pressed, bool R3Pressed);
 void Calibration(bool startButtonPressed);
 void Reset(bool buttonPressed);

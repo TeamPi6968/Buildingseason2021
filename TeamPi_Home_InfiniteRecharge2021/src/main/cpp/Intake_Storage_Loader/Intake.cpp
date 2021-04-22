@@ -51,6 +51,7 @@ void Intake::IntakeSolonoids (bool buttonPressed, int cellAmount){
 
         }
     }
+    frc::SmartDashboard::PutNumber("Status intake", StatusIntake);
 }
 
 

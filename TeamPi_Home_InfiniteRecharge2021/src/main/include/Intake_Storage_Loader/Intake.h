@@ -5,6 +5,7 @@
 #include "rev/CANSparkMax.h"
 #include <frc/Joystick.h>
 #include "Intake_Storage_Loader/C04_PI_Pixy.h"
+#include <frc/smartdashboard/SmartDashboard.h> 
 
 class Intake {
 private:

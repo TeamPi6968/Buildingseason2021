@@ -230,6 +230,7 @@ void Loader::Shoot(bool buttonPressed, bool IRSensor)
      
     } */
   }
+  frc::SmartDashboard::PutNumber("Amount of cells", AmountCellsInStorage);
 }
 
 /*
@@ -338,17 +339,7 @@ void Loader::simulating(bool button1, bool button2, bool button3)
     cout << " cells is " << AmountCellsInStorage << endl;
   }
 
-  /*
- if (button3)
-  {
-    
-  }
- else
- {
-   
  }
- */
-}
 
 /*
 void Loader::visualisation()
