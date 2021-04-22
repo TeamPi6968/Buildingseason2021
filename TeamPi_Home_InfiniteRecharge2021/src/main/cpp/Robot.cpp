@@ -19,6 +19,9 @@ void Robot::TeleopInit() {
 
   Swerve.SetAllPID();
   Swerve.ZeroDrivetrain();
+
+  init_States();
+
 }
 
 void Robot::TeleopPeriodic() {
@@ -43,6 +46,7 @@ void Robot::TestInit() {}
 void Robot::TestPeriodic() {
   // DP.RecBounce();
 }
+
 
 
 #ifndef RUNNING_FRC_TESTS
