@@ -14,6 +14,7 @@ using namespace std;
 
 void Outtake::Move(double xValue, double yValue, bool startButtonPressed, bool L3Pressed, bool R3Pressed)
 {
+  /*
   Calibration(startButtonPressed);
   Home(L3Pressed, R3Pressed);
 
@@ -28,13 +29,21 @@ void Outtake::Move(double xValue, double yValue, bool startButtonPressed, bool L
     {
       SetAngle(yValue);
     }
-  }
+  }*/
+// added this functiont to skip the calibration for the angle.
+Home(L3Pressed, R3Pressed);
+if (rotationHomed) // Can't turn while homing
+    {
+      SetRotation(xValue);
+ SetAngle(yValue);
+    }
+ 
 }
 
 void Outtake::Home(bool L3Pressed, bool R3Pressed)
 {
   rotationHome(L3Pressed);
-  angleHome(R3Pressed);
+  // angleHome(R3Pressed);
 }
 
 void Outtake::Calibration(bool startButtonPressed)
@@ -110,6 +119,9 @@ void Outtake::AngleCalibration()
       }
     }
   }
+  
+
+
 }
 
 void Outtake::SetRotation(double xValue)
