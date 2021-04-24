@@ -68,7 +68,7 @@ bool rotationHomed = false;
 bool angleHomed = false;
 
 // General functions
-void Move(double xValue, double yValue, bool startButtonPressed, bool L3Pressed, bool R3Pressed);
+void Move(double xValue, double yValue);
 void Home(bool L3Pressed, bool R3Pressed);
 void Calibration(bool startButtonPressed);
 void Reset(bool buttonPressed);

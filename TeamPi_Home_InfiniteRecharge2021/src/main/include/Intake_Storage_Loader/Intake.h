@@ -11,6 +11,7 @@ class Intake {
 private:
 //variables
 bool StatusIntake = 0;
+bool thing = 0;
 double IntakeMotorSpeed = 0.6;
 
 //setup compressor
@@ -33,8 +34,7 @@ public:
 
 void IntakeMotor();
 void IntakeSolonoids (bool buttonPressed, int cellAmount);
-
+void IntakeMotors (bool buttonPressed, int cellAmount);
 };
-
 // DoubleSolenoid;
 // double current = c.GetCompressorCurrent()

@@ -34,7 +34,7 @@ void Intake::IntakeSolonoids (bool buttonPressed, int cellAmount){
         //cylinder is out
         SolonoidLeft.Set(frc::DoubleSolenoid::Value::kReverse);
         //spin spark motorscontrollers for intake 
-        SparkMaxIntake.Set(IntakeMotorSpeed);
+        // SparkMaxIntake.Set(IntakeMotorSpeed);
         
         cout<< "going in" << endl; 
         }
@@ -46,12 +46,24 @@ void Intake::IntakeSolonoids (bool buttonPressed, int cellAmount){
         //cylinder is in
         SolonoidLeft.Set(frc::DoubleSolenoid::Value::kForward);
         //stop motor
-        SparkMaxIntake.Set(0);
+        // SparkMaxIntake.Set(0);
         cout<< "going out" << endl;
 
         }
     }
     frc::SmartDashboard::PutNumber("Status intake", StatusIntake);
+}
+
+void Intake::IntakeMotors (bool buttonPressed, int cellAmount){
+    if (buttonPressed){
+        if (thing == 0){
+        SparkMaxIntake.Set(IntakeMotorSpeed);
+        thing = 1;}
+        else if (thing  == 1){
+          SparkMaxIntake.Set(0);  
+          thing = 0;
+        }
+}
 }
 
 
