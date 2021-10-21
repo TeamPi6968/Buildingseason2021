@@ -98,6 +98,7 @@ void Outtake::AngleCalibration()
     switch (angleLimit.Get()) // Check if the angle limit has been reached
     {
     case false:                           // If not
+      cout << angleLimit.Get();
       SparkMaxAngleMotor.Set(angleSpeed); // Move the shute towards the limit switch
       break;
     case true:

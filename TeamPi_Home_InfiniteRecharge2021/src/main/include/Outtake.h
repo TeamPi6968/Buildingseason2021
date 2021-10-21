@@ -31,7 +31,7 @@ CANEncoder *SparkMaxAngleEncoder = new CANEncoder(SparkMaxAngleMotor.GetEncoder(
 CANEncoder *SparkMaxRotationEncoder = new CANEncoder(SparkMaxRotationMotor.GetEncoder());
 
 // limit switches
-DigitalInput angleLimit{1};
+DigitalInput angleLimit{3};
 DigitalInput rotationLimit{0};
 
 // Motor speeds

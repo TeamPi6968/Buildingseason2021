@@ -48,7 +48,8 @@ void Robot::TeleopPeriodic() {
   ModIntake.IntakeSolonoids(m_stick.GetRawButtonPressed(ButtonRB),ModTurret.AmountCellsInStorage); //6 = right top trigger
   ModIntake.IntakeMotors(m_stick.GetRawButtonPressed(ButtonLB),ModTurret.AmountCellsInStorage); //6 = left top trigger
 
-  ModTurret.simulating(m_stick.GetRawButtonPressed(ButtonX),m_stick.GetRawButtonPressed(ButtonY),m_stickTurret.GetRawButtonPressed(ButtonA));
+  ModTurret.simulating(m_stickTurret.GetRawButtonPressed(ButtonX),m_stickTurret.GetRawButtonPressed(ButtonY),m_stickTurret.GetRawButtonPressed(ButtonA));
+  ModTurret.Shoot(m_stickTurret.GetRawButtonPressed(ButtonB),m_stickTurret.GetRawButtonPressed(ButtonY));
 }
 
 void Robot::DisabledInit() {}
